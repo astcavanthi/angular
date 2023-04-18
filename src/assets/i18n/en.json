@@ -1,0 +1,139 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Main"
+    },
+    "DASHBOARD": {
+      "TEXT": "Dashboard",
+      "LIST": {
+        "DASHBOARD1": "Dashboard 1",
+        "DASHBOARD2": "Dashboard 2",
+        "TEACHER-DASHBOARD": "Teacher Dashboard",
+        "STUDENT-DASHBOARD": "Student Dashboard"
+      }
+    },
+    "TEACHERS": {
+      "TEXT": "Customers",
+      "LIST": {
+        "ALL-TEACHERS": "All Customers",
+        "ADD-TEACHER": "Add Customer",
+        "EDIT-TEACHER": "Edit Customer",
+        "ABOUT-TEACHER": "About Customer"
+      }
+    },
+    "STUDENTS": {
+      "TEXT": "Users",
+      "LIST": {
+        "ALL-STUDENTS": "All Users",
+        "ADD-STUDENT": "Add User",
+        "EDIT-STUDENT": "Edit Student",
+        "ABOUT-STUDENT": "About Student",
+        "STUDENT-ATTENDANCE": "Student Attendance"
+      }
+    },
+    "COURSES": {
+      "TEXT": "Courses",
+      "LIST": {
+        "ALL-COURSES": "All Courses",
+        "ADD-COURSE": "Add Course",
+        "EDIT-COURSE": "Edit Course",
+        "ABOUT-COURSE": "About Course"
+      }
+    },
+    "LIBRARY": {
+      "TEXT": "Library",
+      "LIST": {
+        "ALL-LIBRARY": "All Library Assets",
+        "ADD-LIBRARY": "Add Library Asset",
+        "EDIT-LIBRARY": "Edit Library Asset"
+      }
+    },
+    "DEPARTMENTS": {
+      "TEXT": "Seetings",
+      "LIST": {
+        "ALL-DEPARTMENT": "Country",
+        "ALL-STATE": "State",
+        "ALL-DISTRICT": "District",
+        "ALL-CITY": "City",
+        "ALL-BRANCH": "Branch",
+        "ALL-RELIGION": "Religion",
+        "ALL-CASTE": "Caste",
+        "ALL-SUB-CASTE": "Sub Caste",
+        "ALL-OCCUPATION": "Occupation",
+        "ALL-EDUCATION": "Education Details",
+        "ALL-LANGUAGE": "Language",
+        "ALL-SOURCE": "Source",
+        "ALL-UNIVERSITES": "Universites",
+        "ALL-DESIGNATION": "Designation",
+        "ALL-PROFESSION": "Profession"
+      }
+    },
+    "STAFF": {
+      "TEXT": "Staff(User)",
+      "LIST": {
+        "ALL-STAFF": "All Staff",
+        "ADD-STAFF": "Add Staff",
+        "EDIT-STAFF": "Edit Staff",
+        "ABOUT-STAFF": "About Staff"
+      }
+    },
+    "HOLIDAY": {
+      "TEXT": "Holiday",
+      "LIST": {
+        "ALL-HOLIDAY": "All Holiday",
+        "ADD-HOLIDAY": "Add Holiday",
+        "EDIT-HOLIDAY": "Edit Holiday"
+      }
+    },
+    "FEES": {
+      "TEXT": "Fees",
+      "LIST": {
+        "ALL-FEES": "All Fees",
+        "ADD-FEES": "Add fees",
+        "EDIT-FEES": "Edit fees",
+        "FEE-RECEIPT": "Fee Receipt"
+      }
+    },
+    "ATTENDANCE": {
+      "TEXT": "Attendance",
+      "LIST": {
+        "STAFF": "Staff Attendance",
+        "DETAILS": "Attendance Details",
+        "SHEET": "Attendance Sheet"
+      }
+    },
+
+    "TEACHER": {
+      "TEXT": "Teacher",
+      "LIST": {
+        "DASHBOARD": "Dashboard",
+        "LECTURES": "Lectures",
+        "LEAVE-REQUEST": "Leave Request",
+        "EXAM-SCHEDULE": "Exam Schedule",
+        "SETTINGS": "Settings"
+      }
+    },
+    "STUDENT": {
+      "TEXT": "Student",
+      "LIST": {
+        "DASHBOARD": "Dashboard",
+        "HOMEWORK": "Homework",
+        "LEAVE-REQUEST": "Leave Request",
+        "TIME-TABLE": "Time Table",
+        "SETTINGS": "Settings"
+      }
+    },
+    "APPS": {
+      "TEXT": "Apps"
+    },
+    "CALENDAR": {
+      "TEXT": "Calendar"
+    },
+    "TASK": {
+      "TEXT": "Task"
+    },
+    "CONTACTS": {
+      "TEXT": "Contacts"
+    }
+  }
+}
