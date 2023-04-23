@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SettingService } from './setting.service';
+import { CountryService } from './country.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Setting } from './setting.model';
+import { Country } from './country.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -33,19 +33,16 @@ export class CountryComponent
 {
   displayedColumns = [
     'select',
-    'dName',
-    'hod',
-    'phone',
-    'email',
-    'sYear',
-    'sCapacity',
+    'code',
+    'name',
+    'status',
     'actions',
   ];
-  exampleDatabase?: SettingService;
+  exampleDatabase?: CountryService;
   dataSource!: ExampleDataSource;
-  selection = new SelectionModel<Setting>(true, []);
+  selection = new SelectionModel<Country>(true, []);
   id?: number;
-  setting?: Setting;
+  country?: Country;
   breadscrums = [
     {
       title: 'All Countries',
@@ -56,7 +53,7 @@ export class CountryComponent
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public settingService: SettingService,
+    public settingService: CountryService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -83,7 +80,7 @@ export class CountryComponent
     }
     const dialogRef = this.dialog.open(AddFormComponent, {
       data: {
-        setting: this.setting,
+        country: this.country,
         action: 'add',
       },
       direction: tempDirection,
@@ -105,7 +102,7 @@ export class CountryComponent
       }
     });
   }
-  editCall(row: Setting) {
+  editCall(row: Country) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -142,7 +139,7 @@ export class CountryComponent
       }
     });
   }
-  deleteItem(row: Setting) {
+  deleteItem(row: Country) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -200,7 +197,7 @@ export class CountryComponent
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
-      this.selection = new SelectionModel<Setting>(true, []);
+      this.selection = new SelectionModel<Country>(true, []);
     });
     this.showNotification(
       'snackbar-danger',
@@ -210,7 +207,7 @@ export class CountryComponent
     );
   }
   public loadData() {
-    this.exampleDatabase = new SettingService(this.httpClient);
+    this.exampleDatabase = new CountryService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -230,12 +227,9 @@ export class CountryComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        'Department Name': x.dName,
-        'Head Of Department': x.hod,
-        Phone: x.phone,
-        Email: x.email,
-        'Start Year': x.sYear,
-        'Students Capacity': x.sCapacity,
+        'Code': x.code,
+        'Country Name': x.name,
+        'Status': x.status,
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -254,7 +248,7 @@ export class CountryComponent
     });
   }
   // context menu
-  onContextMenu(event: MouseEvent, item: Setting) {
+  onContextMenu(event: MouseEvent, item: Country) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -265,7 +259,7 @@ export class CountryComponent
     }
   }
 }
-export class ExampleDataSource extends DataSource<Setting> {
+export class ExampleDataSource extends DataSource<Country> {
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -273,10 +267,10 @@ export class ExampleDataSource extends DataSource<Setting> {
   set filter(filter: string) {
     this.filterChange.next(filter);
   }
-  filteredData: Setting[] = [];
-  renderedData: Setting[] = [];
+  filteredData: Country[] = [];
+  renderedData: Country[] = [];
   constructor(
-    public exampleDatabase: SettingService,
+    public exampleDatabase: CountryService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
@@ -285,7 +279,7 @@ export class ExampleDataSource extends DataSource<Setting> {
     this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Setting[]> {
+  connect(): Observable<Country[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this.exampleDatabase.dataChange,
@@ -299,12 +293,11 @@ export class ExampleDataSource extends DataSource<Setting> {
         // Filter data
         this.filteredData = this.exampleDatabase.data
           .slice()
-          .filter((setting: Setting) => {
+          .filter((country: Country) => {
             const searchStr = (
-              setting.dName +
-              setting.hod +
-              setting.phone +
-              setting.email
+              country.code +
+              country.name +
+              country.status
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -324,7 +317,7 @@ export class ExampleDataSource extends DataSource<Setting> {
     // disconnect
   }
   /** Returns a sorted copy of the database data. */
-  sortData(data: Setting[]): Setting[] {
+  sortData(data: Country[]): Country[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -332,22 +325,16 @@ export class ExampleDataSource extends DataSource<Setting> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
       switch (this._sort.active) {
-        case 'id':
-          [propertyA, propertyB] = [a.id, b.id];
+        case 'code':
+          [propertyA, propertyB] = [a.code, b.code];
           break;
-        case 'dName':
-          [propertyA, propertyB] = [a.dName, b.dName];
+        case 'name':
+          [propertyA, propertyB] = [a.name, b.name];
           break;
-        case 'hod':
-          [propertyA, propertyB] = [a.hod, b.hod];
+        case 'status':
+          [propertyA, propertyB] = [a.status, b.status];
           break;
-        // case 'date': [propertyA, propertyB] = [a.date, b.date]; break;
-        case 'phone':
-          [propertyA, propertyB] = [a.phone, b.phone];
-          break;
-        case 'email':
-          [propertyA, propertyB] = [a.email, b.email];
-          break;
+
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;

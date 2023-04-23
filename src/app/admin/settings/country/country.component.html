@@ -71,42 +71,20 @@
                     </mat-cell>
                   </ng-container>
                   <!-- ID Column -->
-                  <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                  <ng-container matColumnDef="code">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>code</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="dName">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header><!--Department Name--></mat-header-cell>
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Country Name</mat-header-cell>
                     <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <!--<span class="mobile-label">Department Name:</span> {{row.dName}}--></mat-cell>
+                      <span class="mobile-label">Country Name:</span> {{row.name}}</mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="hod">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Country Name
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <span class="mobile-label">Head Of Department:</span>{{row.hod}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="phone">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header><!--Phone--></mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <!--<span class="mobile-label">Phone:</span> {{row.phone }}-->
-                    </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="email">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header><!--Email--></mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <!--<span class="mobile-label">Email:</span>{{row.email}}--></mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="sYear">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header><!--Start Year--></mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <!--<span class="mobile-label">Start Year:</span>{{row.sYear}}--></mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="sCapacity">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header><!--Students Capacity-->
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                     <!-- <span class="mobile-label">Students Capacity:</span>{{row.sCapacity}}--></mat-cell>
+                      <span class="mobile-label">Status:</span>{{row.status}}</mat-cell>
                   </ng-container>
                   <!-- actions -->
                   <ng-container matColumnDef="actions">
@@ -194,4 +172,3 @@
       </div>
     </div>
   </section>
-  

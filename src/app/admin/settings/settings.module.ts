@@ -23,14 +23,14 @@ import { SettingsRoutingModule } from './settings-routing.module';
 import { CountryComponent } from './country/country.component';
 import { AddFormComponent } from './country/add/add-form/add-form.component';
 import { DeleteDialogComponent } from './country/add/delete/delete.component';
-import { SettingService } from './country/setting.service';
+import { CountryService } from './country/country.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from './../../shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
-   
+
     CountryComponent,
     AddFormComponent,
     DeleteDialogComponent,
@@ -61,6 +61,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ComponentsModule,
     SharedModule,
   ],
-  providers: [SettingService],
+  providers: [CountryService],
 })
 export class SettingsModule {}

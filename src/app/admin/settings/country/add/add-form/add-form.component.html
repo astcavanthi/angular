@@ -12,14 +12,14 @@
       </button>
     </div>
     <div mat-dialog-content>
-      <form class="register-form m-4" [formGroup]="settingForm" (ngSubmit)="submit">
+      <form class="register-form m-4" [formGroup]="countryForm" (ngSubmit)="submit">
         <div class="row">
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
             <mat-form-field class="example-full-width mb-3" appearance="outline">
               <mat-label>Country Name</mat-label>
               <input matInput formControlName="hod" required>
               <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
-              <mat-error *ngIf="settingForm.get('hod')?.hasError('required')">
+              <mat-error *ngIf="countryForm.get('hod')?.hasError('required')">
                Country name required
               </mat-error>
             </mat-form-field>
@@ -55,7 +55,7 @@
               </mat-error>
             </mat-form-field>
           </div>-->
-  
+
         </div>
         <!--<div class="row">
           <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -105,7 +105,7 @@
         <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
             <div class="example-button-row">
-              <button mat-raised-button color="primary" [disabled]="!settingForm.valid" [mat-dialog-close]="1"
+              <button mat-raised-button color="primary" [disabled]="!countryForm.valid" [mat-dialog-close]="1"
                 (click)="confirmAdd()">Save</button>
               <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
             </div>
@@ -114,4 +114,3 @@
       </form>
     </div>
   </div>
-  

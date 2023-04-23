@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Setting } from './setting.model';
+import { Country } from './country.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 @Injectable()
-export class SettingService extends UnsubscribeOnDestroyAdapter {
-  private readonly API_URL = 'assets/data/setting.json';
+export class CountryService extends UnsubscribeOnDestroyAdapter {
+   private readonly API_URL = 'assets/data/country.json';
+  // private readonly API_URL = 'http://127.0.0.1:8000/masters/countrylist/';
   isTblLoading = true;
-  dataChange: BehaviorSubject<Setting[]> = new BehaviorSubject<Setting[]>(
+  dataChange: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>(
     []
   );
   // Temporarily stores data from dialogs
-  dialogData!: Setting;
+  dialogData!: Country;
   constructor(private httpClient: HttpClient) {
     super();
   }
-  get data(): Setting[] {
+  get data(): Country[] {
     return this.dataChange.value;
   }
   getDialogData() {
@@ -23,7 +24,7 @@ export class SettingService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getCountry(): void {
-    this.subs.sink = this.httpClient.get<Setting[]>(this.API_URL).subscribe({
+    this.subs.sink = this.httpClient.get<Country[]>(this.API_URL).subscribe({
       next: (data) => {
         this.isTblLoading = false;
         this.dataChange.next(data);
@@ -34,8 +35,8 @@ export class SettingService extends UnsubscribeOnDestroyAdapter {
       },
     });
   }
-  addSetting(setting: Setting): void {
-    this.dialogData = setting;
+  addCountry(country: Country): void {
+    this.dialogData = country;
 
     // this.httpClient.post(this.API_URL, department)
     //   .subscribe({
@@ -47,8 +48,8 @@ export class SettingService extends UnsubscribeOnDestroyAdapter {
     //     },
     //   });
   }
-  updateSetting(setting: Setting): void {
-    this.dialogData = setting;
+  updateCountry(country: Country): void {
+    this.dialogData = country;
 
     // this.httpClient.put(this.API_URL + department.id, department)
     //     .subscribe({
@@ -60,7 +61,7 @@ export class SettingService extends UnsubscribeOnDestroyAdapter {
     //       },
     //     });
   }
-  deleteSetting(id: number): void {
+  deleteCountry(id: number): void {
     console.log(id);
 
     // this.httpClient.delete(this.API_URL + id)

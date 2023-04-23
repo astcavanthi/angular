@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
-import { SettingService } from '../../setting.service';
+import { CountryService } from '../../country.service';
 
 export interface DialogData {
   id: number;
@@ -18,13 +18,13 @@ export class DeleteDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public settingService: SettingService
+    public settingService: CountryService
   ) {}
   onNoClick(): void {
     this.dialogRef.close();
   }
   confirmDelete(): void {
-    this.settingService.deleteSetting(this.data.id);
+    // this.settingService.deleteSetting(this.data.id);
   }
 }
 
