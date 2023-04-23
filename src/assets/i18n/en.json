@@ -13,10 +13,10 @@
       }
     },
     "TEACHERS": {
-      "TEXT": "Customers",
+      "TEXT": "Teachers",
       "LIST": {
-        "ALL-TEACHERS": "All Customers",
-        "ADD-TEACHER": "Add Customer",
+        "ALL-TEACHERS": "All Teachers",
+        "ADD-TEACHER": "Add Teacher",
         "EDIT-TEACHER": "Edit Customer",
         "ABOUT-TEACHER": "About Customer"
       }
@@ -49,7 +49,7 @@
       }
     },
     "DEPARTMENTS": {
-      "TEXT": "Seetings",
+      "TEXT": "Departments",
       "LIST": {
         "ALL-DEPARTMENT": "Country",
         "ALL-STATE": "State",
@@ -66,6 +66,13 @@
         "ALL-UNIVERSITES": "Universites",
         "ALL-DESIGNATION": "Designation",
         "ALL-PROFESSION": "Profession"
+      }
+    },
+    "SETTINGS": {
+      "TEXT": "Settings",
+      "LIST": {
+        "COUNTRYS": "Country"
+        
       }
     },
     "STAFF": {

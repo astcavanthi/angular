@@ -196,6 +196,7 @@ export const ROUTES: RouteInfo[] = [
         role: [''],
         submenu: [],
       },
+      
     ],
   },/*
   {
@@ -559,6 +560,57 @@ export const ROUTES: RouteInfo[] = [
 
 
 
+
+     /* {
+        path: '/admin/departments/add-department',
+        title: 'MENUITEMS.DEPARTMENTS.LIST.ADD-DEPARTMENT',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
+      {
+        path: '/admin/departments/edit-department',
+        title: 'MENUITEMS.DEPARTMENTS.LIST.EDIT-DEPARTMENT',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },*/
+    ],
+  },
+  {
+    path: '',
+    title: 'MENUITEMS.SETTINGS.TEXT',
+    iconType: 'material-icons-two-tone',
+    icon: 'business',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    role: ['Admin'],
+    submenu: [
+      {
+        path: '/admin/settings/country',
+        title: 'MENUITEMS.SETTINGS.LIST.COUNTRYS',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
+      
 
      /* {
         path: '/admin/departments/add-department',
