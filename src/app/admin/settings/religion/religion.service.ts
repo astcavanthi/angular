@@ -24,7 +24,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getReligion(): void {
-    this.subs.sink = this.httpClient.get<ReligionResponse>(environment.apiUrl+"masters/religion/")
+    this.subs.sink = this.httpClient.get<ReligionResponse>(environment.apiUrl+"/masters/religion/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -39,7 +39,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   addReligion(religion: Religion): void {
     this.dialogData = religion;
 
-    this.httpClient.post(environment.apiUrl+"masters/religion/", religion)
+    this.httpClient.post(environment.apiUrl+"/masters/religion/", religion)
       .subscribe({
         next: (data) => {
           this.dialogData = religion;
@@ -52,7 +52,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   updateReligion(religion: Religion): void {
     this.dialogData = religion;
 
-    this.httpClient.put(environment.apiUrl+ "masters/religion/", religion)
+    this.httpClient.put(environment.apiUrl+ "/masters/religion/", religion)
       .subscribe({
         next: (data) => {
           this.dialogData = religion;
@@ -65,7 +65,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   deleteReligion(id: number): void {
     console.log(id);
 
-    this.httpClient.delete(environment.apiUrl+"masters/religion/" + id)
+    this.httpClient.delete(environment.apiUrl+"/masters/religion/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -77,7 +77,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusReligion(id: number): void {
-    this.httpClient.patch(environment.apiUrl+"masters/religion/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"/masters/religion/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

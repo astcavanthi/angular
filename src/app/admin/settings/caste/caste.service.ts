@@ -25,7 +25,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getCaste(): void {
-    this.subs.sink = this.httpClient.get<CasteResponse>(environment.apiUrl+"masters/caste/")
+    this.subs.sink = this.httpClient.get<CasteResponse>(environment.apiUrl+"/masters/caste/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -40,7 +40,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   addCaste(caste: Caste): void {
     this.dialogData = caste;
 
-    this.httpClient.post(environment.apiUrl+"masters/caste/", caste)
+    this.httpClient.post(environment.apiUrl+"/masters/caste/", caste)
       .subscribe({
         next: (data) => {
           this.dialogData = caste;
@@ -52,7 +52,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
   updateCaste(caste: Caste): void {
     this.dialogData = caste;
-    this.httpClient.put(environment.apiUrl + "masters/caste/", caste)
+    this.httpClient.put(environment.apiUrl + "/masters/caste/", caste)
       .subscribe({
         next: (data) => {
           this.dialogData = caste;
@@ -64,7 +64,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
   deleteCaste(id: number): void {
 
-    this.httpClient.delete(environment.apiUrl+"masters/caste/" + id)
+    this.httpClient.delete(environment.apiUrl+"/masters/caste/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -76,7 +76,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusCaste(id: number): void {
-    this.httpClient.patch(environment.apiUrl+"masters/caste/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"/masters/caste/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

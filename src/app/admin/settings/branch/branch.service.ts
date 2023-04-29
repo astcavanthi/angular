@@ -25,7 +25,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getBranch(): void {
-    this.subs.sink = this.httpClient.get<BranchResponse>(environment.apiUrl+"masters/branch/")
+    this.subs.sink = this.httpClient.get<BranchResponse>(environment.apiUrl+"/masters/branch/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -40,7 +40,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   addBranch(branch: Branch): void {
     this.dialogData = branch;
 
-    this.httpClient.post(environment.apiUrl+"masters/branch/", branch)
+    this.httpClient.post(environment.apiUrl+"/masters/branch/", branch)
       .subscribe({
         next: (data) => {
           this.dialogData = branch;
@@ -52,7 +52,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
   updateBranch(branch: Branch): void {
     this.dialogData = branch;
-    this.httpClient.put(environment.apiUrl + "masters/branch/", branch)
+    this.httpClient.put(environment.apiUrl + "/masters/branch/", branch)
       .subscribe({
         next: (data) => {
           this.dialogData = branch;
@@ -64,7 +64,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
   deleteBranch(id: number): void {
 
-    this.httpClient.delete(environment.apiUrl+"masters/branch/" + id)
+    this.httpClient.delete(environment.apiUrl+"/masters/branch/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -76,7 +76,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusBranch(id: number): void {
-    this.httpClient.patch(environment.apiUrl+"masters/branch/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"/masters/branch/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

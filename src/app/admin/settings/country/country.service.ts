@@ -25,7 +25,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getCountry(): void {
-    this.subs.sink = this.httpClient.get<CountryResponse>(environment.apiUrl+"masters/country/")
+    this.subs.sink = this.httpClient.get<CountryResponse>(environment.apiUrl+"/masters/country/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -40,7 +40,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   addCountry(country: Country): void {
     this.dialogData = country;
 
-    this.httpClient.post(environment.apiUrl+"masters/country/", country)
+    this.httpClient.post(environment.apiUrl+"/masters/country/", country)
       .subscribe({
         next: (data) => {
           this.dialogData = country;
@@ -52,7 +52,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
   updateCountry(country: Country): void {
     this.dialogData = country;
-    this.httpClient.put(environment.apiUrl + "masters/country/", country)
+    this.httpClient.put(environment.apiUrl + "/masters/country/", country)
         .subscribe({
           next: (data) => {
             this.dialogData = country;
@@ -64,7 +64,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
   deleteCountry(id: number): void {
 
-    this.httpClient.delete(environment.apiUrl+"masters/country/" + id)
+    this.httpClient.delete(environment.apiUrl+"/masters/country/" + id)
         .subscribe({
           next: (data) => {
             console.log(id);
@@ -76,7 +76,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusCountry(id: number): void {
-    this.httpClient.patch(environment.apiUrl+"masters/country/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"/masters/country/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);
