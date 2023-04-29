@@ -32,6 +32,11 @@ import { ReligionComponent } from './religion/religion.component';
 import { AddReligionFormComponent } from './religion/add/add-form/add-form.component';
 import { ReligionService } from './religion/religion.service';
 
+import { CasteComponent} from "./caste/caste.component";
+import {AddCasteFormComponent} from './caste/add/add-form/add-form.component';
+import {CasteService} from "./caste/caste.service";
+
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from './../../shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -44,7 +49,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     BranchComponent,
     AddBranchFormComponent,
     ReligionComponent,
-    AddReligionFormComponent
+    AddReligionFormComponent,
+    CasteComponent,
+    AddCasteFormComponent
   ],
   imports: [
     CommonModule,
@@ -76,6 +83,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     {provide:CountryService},
     {provide:BranchService},
     {provide:ReligionService},
+    {provide:CasteService},
     /*CountryService,
               BranchService*/],
 })

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "code": "11",
+    "name": "India",
+    "createdon": "2023-04-22T17:12:19.654464Z",
+    "modifiedon": "2023-04-22T17:12:19.654464Z",
+    "status": 1,
+    "createdby": 1,
+    "modifiedby": null
+  },
+  {
+    "id": 2,
+    "code": "22",
+    "name": "USA",
+    "createdon": "2023-04-22T17:12:42.506634Z",
+    "modifiedon": "2023-04-22T17:12:42.506634Z",
+    "status": 1,
+    "createdby": 1,
+    "modifiedby": null
+  },
+  {
+    "id": 3,
+    "code": "33",
+    "name": "UK",
+    "createdon": "2023-04-22T17:13:02.127243Z",
+    "modifiedon": "2023-04-22T17:13:02.127243Z",
+    "status": 1,
+    "createdby": 1,
+    "modifiedby": null
+  },
+  {
+    "id": 4,
+    "code": "44",
+    "name": "CANADA",
+    "createdon": "2023-04-22T17:13:21.562264Z",
+    "modifiedon": "2023-04-22T17:13:21.562264Z",
+    "status": 1,
+    "createdby": 1,
+    "modifiedby": null
+  }
+]

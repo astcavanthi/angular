@@ -73,7 +73,8 @@
       "LIST": {
         "COUNTRYS": "Country",
         "BRANCHS": "Branch",
-        "RELIGIONS": "Religion"
+        "RELIGIONS": "Religion",
+        "CASTES": "Caste"
 
       }
     },

@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { BranchService } from './branch.service';
+import { CasteService } from './caste.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {  Branch } from './branch.model';
+import {  Caste } from './caste.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -13,46 +13,47 @@ import {
 } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AddBranchFormComponent } from './add/add-form/add-form.component';
+import { AddCasteFormComponent } from './add/add-form/add-form.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from './../../../shared/UnsubscribeOnDestroyAdapter';
 import { Direction } from '@angular/cdk/bidi';
 import { TableExportUtil } from 'src/app/shared/tableExportUtil';
 import { TableElement } from 'src/app/shared/TableElement';
+import {AddBranchFormComponent} from "../branch/add/add-form/add-form.component";
+import {Branch} from "../branch/branch.model";
 
 @Component({
-  selector: 'app-branch',
-  templateUrl: './branch.component.html',
-  styleUrls: ['./branch.component.scss'],
+  selector: 'app-cast',
+  templateUrl: './caste.component.html',
+  styleUrls: ['./caste.component.scss'],
 })
-export class  BranchComponent
+export class  CasteComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
   displayedColumns = [
     'select',
     'name',
-    'address',
     'status',
     'actions',
   ];
-  exampleDatabase?:  BranchService;
+  exampleDatabase?:  CasteService;
   dataSource!: ExampleDataSource;
-  selection = new SelectionModel< Branch>(true, []);
+  selection = new SelectionModel< Caste>(true, []);
   id?: number;
-  branch?: Branch;
+  caste?: Caste;
   breadscrums = [
     {
-      title: 'All Branch',
-      items: ['Branch'],
+      title: 'All Caste',
+      items: [' Caste'],
       active: 'All',
     },
   ];
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public branchService:  BranchService,
+    public casteService:  CasteService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -77,9 +78,9 @@ export class  BranchComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddBranchFormComponent, {
+    const dialogRef = this.dialog.open(AddCasteFormComponent, {
       data: {
-        branch: this.branch,
+        caste: this.caste,
         action: 'add',
       },
       direction: tempDirection,
@@ -89,7 +90,7 @@ export class  BranchComponent
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
         this.exampleDatabase?.dataChange.value.push(
-          {...this.branchService.getDialogData(), status: 1}
+          {...this.casteService.getDialogData(), status: 1}
         );
         /* this.exampleDatabase?.dataChange.value.unshift(
            {...this.countryService.getDialogData(), status: 1}
@@ -97,14 +98,14 @@ export class  BranchComponent
         this.refreshTable();
         this.showNotification(
           'snackbar-success',
-          'Add Branch Successfully...!!!',
+          'Add Caste Successfully...!!!',
           'top',
           'center'
         );
       }
     });
   }
-  editCall(row: Branch) {
+  editCall(row: Caste) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -112,9 +113,9 @@ export class  BranchComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddBranchFormComponent, {
+    const dialogRef = this.dialog.open(AddCasteFormComponent, {
       data: {
-        branch: row,
+        caste: row,
         action: 'edit',
       },
       direction: tempDirection,
@@ -129,13 +130,13 @@ export class  BranchComponent
 
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value[foundIndex] =
-            this.branchService.getDialogData();
+            this.casteService.getDialogData();
           // And lastly refresh table
 
           this.refreshTable();
           this.showNotification(
             'snackbar-success',
-            'Edit Branch Successfully...!!!',
+            'Edit Caste Successfully...!!!',
             'top',
             'center'
           );
@@ -144,9 +145,7 @@ export class  BranchComponent
     });
   }
 
-
-
-  deleteItem(row: Branch) {
+  deleteItem(row: Caste) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -165,12 +164,12 @@ export class  BranchComponent
     );
     // for delete we use splice in order to remove single object from DataService
     if (foundIndex != null && this.exampleDatabase) {
-      this.branchService.deleteBranch(this.id);
+      this.casteService.deleteCaste(this.id);
       this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
       this.refreshTable();
       this.showNotification(
         'snackbar-danger',
-        'Delete Branch Successfully...!!!',
+        'Delete Caste Successfully...!!!',
         'top',
         'center'
       );
@@ -179,7 +178,7 @@ export class  BranchComponent
     // });
   }
 
-  statusItem(row: Branch) {
+  statusItem(row: Caste) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -198,7 +197,7 @@ export class  BranchComponent
     );
     // for delete we use splice in order to remove single object from DataService
     if (foundIndex != null && this.exampleDatabase) {
-      this.branchService.statusBranch(this.id);
+      this.casteService.statusCaste(this.id);
       // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
       this.refreshTable();
       this.showNotification(
@@ -211,7 +210,6 @@ export class  BranchComponent
     //  }
     // });
   }
-
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
@@ -241,17 +239,17 @@ export class  BranchComponent
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       // this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
-      this.selection = new SelectionModel<Branch>(true, []);
+      this.selection = new SelectionModel<Caste>(true, []);
     });
     this.showNotification(
       'snackbar-danger',
       totalSelect + ' Record Delete Successfully...!!!',
-      'top',
+      'bottom',
       'center'
     );
   }
   public loadData() {
-    this.exampleDatabase = new  BranchService(this.httpClient);
+    this.exampleDatabase = new  CasteService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -271,8 +269,7 @@ export class  BranchComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        'Branch Name': x.name,
-        ' Branch Address': x.address,
+        ' Cast Name': x.name,
         'Status': x.status,
       }));
 
@@ -292,7 +289,7 @@ export class  BranchComponent
     });
   }
   // context menu
-  onContextMenu(event: MouseEvent, item:  Branch) {
+  onContextMenu(event: MouseEvent, item:  Caste) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -303,7 +300,7 @@ export class  BranchComponent
     }
   }
 }
-export class ExampleDataSource extends DataSource< Branch> {
+export class ExampleDataSource extends DataSource< Caste> {
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -311,10 +308,10 @@ export class ExampleDataSource extends DataSource< Branch> {
   set filter(filter: string) {
     this.filterChange.next(filter);
   }
-  filteredData:  Branch[] = [];
-  renderedData:  Branch[] = [];
+  filteredData:  Caste[] = [];
+  renderedData:  Caste[] = [];
   constructor(
-    public exampleDatabase:  BranchService,
+    public exampleDatabase:  CasteService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
@@ -323,7 +320,7 @@ export class ExampleDataSource extends DataSource< Branch> {
     this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Branch[]> {
+  connect(): Observable<Caste[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this.exampleDatabase.dataChange,
@@ -331,17 +328,16 @@ export class ExampleDataSource extends DataSource< Branch> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getBranch();
+    this.exampleDatabase.getCaste();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
         this.filteredData = this.exampleDatabase.data
           .slice()
-          .filter((branch:  Branch) => {
+          .filter((caste:  Caste) => {
             const searchStr = (
-              branch.name +
-              branch.address +
-              branch.status
+              caste.name +
+              caste.status
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -361,7 +357,7 @@ export class ExampleDataSource extends DataSource< Branch> {
     // disconnect
   }
   /** Returns a sorted copy of the database data. */
-  sortData(data: Branch[]):  Branch[] {
+  sortData(data: Caste[]):  Caste[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -371,9 +367,6 @@ export class ExampleDataSource extends DataSource< Branch> {
       switch (this._sort.active) {
         case 'name':
           [propertyA, propertyB] = [a.name, b.name];
-          break;
-        case 'address':
-          [propertyA, propertyB] = [a.address, b.address];
           break;
         case 'status':
           [propertyA, propertyB] = [a.status, b.status];
@@ -388,4 +381,3 @@ export class ExampleDataSource extends DataSource< Branch> {
     });
   }
 }
-

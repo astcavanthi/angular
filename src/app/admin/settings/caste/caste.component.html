@@ -12,7 +12,7 @@
               <div class="left">
                 <ul class="header-buttons-left ms-0">
                   <li class="tbl-title">
-                    <h2>Branches</h2>
+                    <h2>Castes</h2>
                   </li>
                   <li class="tbl-search-box">
                     <label for="search-input"><i class="material-icons search-icon">search</i></label>
@@ -71,14 +71,14 @@
                     </mat-cell>
                   </ng-container>
                   <!-- ID Column -->
-                  <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Branch Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <span class="mobile-label">Branch Name:</span> {{row.name}}</mat-cell>
+                  <ng-container matColumnDef="code">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>code</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="address">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Branch Address</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.address}}</mat-cell>
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Cast Name</mat-header-cell>
+                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                      <span class="mobile-label">Cast Name:</span> {{row.name}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
@@ -175,4 +175,5 @@
       </div>
     </div>
   </section>
+
 
