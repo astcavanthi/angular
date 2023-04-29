@@ -1,19 +1,20 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
-import { CountryService } from '../../country.service';
+import { ReligionService } from '../../religion.service';
 import {
   UntypedFormControl,
   Validators,
   UntypedFormGroup,
   UntypedFormBuilder,
 } from '@angular/forms';
-import { Country } from '../../country.model';
+import { Religion } from '../../religion.model';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {Country} from "../../../country/country.model";
 
 export interface DialogData {
   id: number;
   action: string;
-  country: Country;
+  religion: Religion;
 }
 
 @Component({
@@ -22,29 +23,29 @@ export interface DialogData {
   styleUrls: ['./add-form.component.scss'],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })
-export class AddFormComponent {
+export class AddReligionFormComponent {
   action: string;
   dialogTitle: string;
-  country: Country;
-  countryNew! : Country ; // Temporarly stores the data into countryNew
-  countryForm: UntypedFormGroup;
+  religion: Religion;
+  religionNew! : Religion ; // Temporarly stores the data into religionNew
+  religionForm: UntypedFormGroup;
   constructor(
-    public dialogRef: MatDialogRef<AddFormComponent>,
+    public dialogRef: MatDialogRef<AddReligionFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public countryService: CountryService,
+    public religionService: ReligionService,
     private fb: UntypedFormBuilder
   ) {
     // Set the defaults
     this.action = data.action;
     if (this.action === 'edit') {
-      this.dialogTitle = 'Edit Country';
-      this.country = data.country;
+      this.dialogTitle = 'Edit Religion';
+      this.religion = data.religion;
     } else {
-      this.dialogTitle = 'Add Country';
-      const blankObject = {} as Country;
-      this.country = new Country(blankObject);
+      this.dialogTitle = 'Add Religion';
+      const blankObject = {} as Religion;
+      this.religion = new Religion(blankObject);
     }
-    this.countryForm = this.createContactForm();
+    this.religionForm = this.createContactForm();
   }
   formControl = new UntypedFormControl('', [
     Validators.required,
@@ -59,9 +60,8 @@ export class AddFormComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
-      code: [this.country.code, [Validators.required]],
-      name: [this.country.name, [Validators.required]]
-     });
+      name: [this.religion.name, [Validators.required]]
+    });
   }
   submit() {
     // emppty stuff
@@ -70,20 +70,17 @@ export class AddFormComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-      if(this.action === 'edit'){
-        const blankObject = {} as Country;
-        this.countryNew = new Country(blankObject);
-        this.countryNew.id = this.country.id;
-        this.countryNew.status=1;
-        this.country = this.countryForm.getRawValue();
-        this.countryNew.code = this.country.code;
-        this.countryNew.name = this.country.name;
-        this.countryService.updateCountry(this.countryNew);
-      }
-
-      else
-     this.countryService.addCountry(this.countryForm.getRawValue());
+    if(this.action === 'edit'){
+      const blankObject = {} as Religion;
+      this.religionNew = new Religion(blankObject);
+      this.religionNew.id = this.religion.id;
+      this.religionNew.status=1;
+      this.religion = this.religionForm.getRawValue();
+      this.religionNew.name = this.religion.name;
+      this.religionService.updateReligion(this.religionNew);
+    }
+    else
+      this.religionService.addReligion(this.religionForm.getRawValue());
   }
-
-
 }
+

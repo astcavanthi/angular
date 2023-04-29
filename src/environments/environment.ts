@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
-  apiUrl: 'http://localhost:4200',
+  production: false,
+  apiUrl: 'http://localhost:8000',
+  oauthkey: "qCB4MNBGShxQ39DWDvZGG36ftCNa63NLJga4cVHH9gtxN9ddeh",
 };

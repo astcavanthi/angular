@@ -12,7 +12,7 @@
               <div class="left">
                 <ul class="header-buttons-left ms-0">
                   <li class="tbl-title">
-                    <h2>Countries</h2>
+                    <h2>Religions</h2>
                   </li>
                   <li class="tbl-search-box">
                     <label for="search-input"><i class="material-icons search-icon">search</i></label>
@@ -72,13 +72,13 @@
                   </ng-container>
                   <!-- ID Column -->
                   <ng-container matColumnDef="code">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Country Code</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>code</mat-header-cell>
                     <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Country Name</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Religion Name</mat-header-cell>
                     <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <span class="mobile-label">Country Name:</span> {{row.name}}</mat-cell>
+                      <span class="mobile-label">Religion Name:</span> {{row.name}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
@@ -87,7 +87,7 @@
                       <mat-slide-toggle class="example-margin" color="primary" [checked]="row.status==1" (click)="$event.stopPropagation()" (click)="statusItem(row)" >
                       </mat-slide-toggle>
                     </mat-cell>
-<!--                      <span class="mobile-label">Status:</span>{{row.status}}-->
+                    <!--                      <span class="mobile-label">Status:</span>{{row.status}}-->
                   </ng-container>
                   <!-- actions -->
                   <ng-container matColumnDef="actions">
@@ -175,3 +175,4 @@
       </div>
     </div>
   </section>
+

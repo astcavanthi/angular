@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CountryService } from './country.service';
+import { BranchService } from './branch.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Country } from './country.model';
+import {  Branch } from './branch.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -13,48 +13,46 @@ import {
 } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AddFormComponent } from './add/add-form/add-form.component';
-// import { DeleteDialogComponent } from './add/delete/delete.component';
+import { AddBranchFormComponent } from './add/add-form/add-form.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from './../../../shared/UnsubscribeOnDestroyAdapter';
 import { Direction } from '@angular/cdk/bidi';
 import { TableExportUtil } from 'src/app/shared/tableExportUtil';
 import { TableElement } from 'src/app/shared/TableElement';
-import {ThemePalette} from "@angular/material/core";
 
 @Component({
-  selector: 'app-country',
-  templateUrl: './country.component.html',
-  styleUrls: ['./country.component.scss'],
+  selector: 'app-branch',
+  templateUrl: './branch.component.html',
+  styleUrls: ['./branch.component.scss'],
 })
-export class CountryComponent
+export class  BranchComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
   displayedColumns = [
     'select',
-    'code',
     'name',
+    'address',
     'status',
     'actions',
   ];
-  exampleDatabase?: CountryService;
+  exampleDatabase?:  BranchService;
   dataSource!: ExampleDataSource;
-  selection = new SelectionModel<Country>(true, []);
+  selection = new SelectionModel< Branch>(true, []);
   id?: number;
-  country?: Country;
+  branch?: Branch;
   breadscrums = [
     {
-      title: 'All Countries',
-      items: ['Country'],
+      title: 'All Branch',
+      items: ['Branch'],
       active: 'All',
     },
   ];
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public countryService: CountryService,
+    public branchService:  BranchService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -79,9 +77,9 @@ export class CountryComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddFormComponent, {
+    const dialogRef = this.dialog.open(AddBranchFormComponent, {
       data: {
-        country: this.country,
+        country: this.branch,
         action: 'add',
       },
       direction: tempDirection,
@@ -91,22 +89,22 @@ export class CountryComponent
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
         this.exampleDatabase?.dataChange.value.push(
-          {...this.countryService.getDialogData(), status: 1}
+          {...this.branchService.getDialogData(), status: 1}
         );
-       /* this.exampleDatabase?.dataChange.value.unshift(
-          {...this.countryService.getDialogData(), status: 1}
-        );*/
+        /* this.exampleDatabase?.dataChange.value.unshift(
+           {...this.countryService.getDialogData(), status: 1}
+         );*/
         this.refreshTable();
         this.showNotification(
           'snackbar-success',
-          'Add Record Successfully...!!!',
+          'Add Branch Successfully...!!!',
           'top',
           'center'
         );
       }
     });
   }
-  editCall(row: Country) {
+  editCall(row: Branch) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -114,9 +112,9 @@ export class CountryComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddFormComponent, {
+    const dialogRef = this.dialog.open(AddBranchFormComponent, {
       data: {
-        country: row,
+        branch: row,
         action: 'edit',
       },
       direction: tempDirection,
@@ -130,14 +128,14 @@ export class CountryComponent
         // Then you update that record using data from dialogData (values you enetered)
 
         if (foundIndex != null && this.exampleDatabase) {
-           this.exampleDatabase.dataChange.value[foundIndex] =
-             this.countryService.getDialogData();
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.branchService.getDialogData();
           // And lastly refresh table
 
           this.refreshTable();
           this.showNotification(
             'snackbar-success',
-            'Edit Record Successfully...!!!',
+            'Edit Branch Successfully...!!!',
             'top',
             'center'
           );
@@ -148,7 +146,7 @@ export class CountryComponent
 
 
 
-  deleteItem(row: Country) {
+  deleteItem(row: Branch) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -156,32 +154,32 @@ export class CountryComponent
     } else {
       tempDirection = 'ltr';
     }
-   /* const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: row,
-      direction: tempDirection,
-    });*/
+    /* const dialogRef = this.dialog.open(DeleteDialogComponent, {
+       data: row,
+       direction: tempDirection,
+     });*/
     // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
     //   if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.countryService.deleteCountry(this.id);
-          this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          this.showNotification(
-            'snackbar-danger',
-            'Delete Record Successfully...!!!',
-            'top',
-            'center'
-          );
-        }
+    const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+      (x) => x.id === this.id
+    );
+    // for delete we use splice in order to remove single object from DataService
+    if (foundIndex != null && this.exampleDatabase) {
+      this.branchService.deleteBranch(this.id);
+      this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+      this.refreshTable();
+      this.showNotification(
+        'snackbar-danger',
+        'Delete Branch Successfully...!!!',
+        'top',
+        'center'
+      );
+    }
     //   }
     // });
   }
 
-  statusItem(row: Country) {
+  statusItem(row: Branch) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -193,27 +191,26 @@ export class CountryComponent
     //   data: row,
     //   direction: tempDirection,
     // });
-   // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-   //   if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.countryService.statusCountry(this.id);
-          // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          this.showNotification(
-            'snackbar-info',
-            'Status Updated Successfully...!!!',
-            'top',
-            'center'
-          );
-        }
+    // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+    //   if (result === 1) {
+    const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+      (x) => x.id === this.id
+    );
+    // for delete we use splice in order to remove single object from DataService
+    if (foundIndex != null && this.exampleDatabase) {
+      this.branchService.statusBranch(this.id);
+      // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+      this.refreshTable();
+      this.showNotification(
+        'snackbar-info',
+        'Status Updated Successfully...!!!',
+        'top',
+        'center'
+      );
+    }
     //  }
-   // });
+    // });
   }
-
 
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
@@ -244,7 +241,7 @@ export class CountryComponent
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       // this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
-      this.selection = new SelectionModel<Country>(true, []);
+      this.selection = new SelectionModel<Branch>(true, []);
     });
     this.showNotification(
       'snackbar-danger',
@@ -254,7 +251,7 @@ export class CountryComponent
     );
   }
   public loadData() {
-    this.exampleDatabase = new CountryService(this.httpClient);
+    this.exampleDatabase = new  BranchService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -274,8 +271,8 @@ export class CountryComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        'Code': x.code,
-        'Country Name': x.name,
+        'Branch Name': x.name,
+        ' Branch Address': x.address,
         'Status': x.status,
       }));
 
@@ -295,7 +292,7 @@ export class CountryComponent
     });
   }
   // context menu
-  onContextMenu(event: MouseEvent, item: Country) {
+  onContextMenu(event: MouseEvent, item:  Branch) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -306,7 +303,7 @@ export class CountryComponent
     }
   }
 }
-export class ExampleDataSource extends DataSource<Country> {
+export class ExampleDataSource extends DataSource< Branch> {
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -314,11 +311,10 @@ export class ExampleDataSource extends DataSource<Country> {
   set filter(filter: string) {
     this.filterChange.next(filter);
   }
-  color: ThemePalette = 'accent';
-  filteredData: Country[] = [];
-  renderedData: Country[] = [];
+  filteredData:  Branch[] = [];
+  renderedData:  Branch[] = [];
   constructor(
-    public exampleDatabase: CountryService,
+    public exampleDatabase:  BranchService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
@@ -327,7 +323,7 @@ export class ExampleDataSource extends DataSource<Country> {
     this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Country[]> {
+  connect(): Observable<Branch[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this.exampleDatabase.dataChange,
@@ -335,17 +331,17 @@ export class ExampleDataSource extends DataSource<Country> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getCountry();
+    this.exampleDatabase.getBranch();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
         this.filteredData = this.exampleDatabase.data
           .slice()
-          .filter((country: Country) => {
+          .filter((branch:  Branch) => {
             const searchStr = (
-              country.code +
-              country.name +
-              country.status
+              branch.name +
+              branch.address +
+              branch.status
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -365,7 +361,7 @@ export class ExampleDataSource extends DataSource<Country> {
     // disconnect
   }
   /** Returns a sorted copy of the database data. */
-  sortData(data: Country[]): Country[] {
+  sortData(data: Branch[]):  Branch[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -373,11 +369,11 @@ export class ExampleDataSource extends DataSource<Country> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
       switch (this._sort.active) {
-        case 'code':
-          [propertyA, propertyB] = [a.code, b.code];
-          break;
         case 'name':
           [propertyA, propertyB] = [a.name, b.name];
+          break;
+        case 'address':
+          [propertyA, propertyB] = [a.address, b.address];
           break;
         case 'status':
           [propertyA, propertyB] = [a.status, b.status];
@@ -392,3 +388,4 @@ export class ExampleDataSource extends DataSource<Country> {
     });
   }
 }
+

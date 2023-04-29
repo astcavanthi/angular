@@ -22,8 +22,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { CountryComponent } from './country/country.component';
 import { AddFormComponent } from './country/add/add-form/add-form.component';
-import { DeleteDialogComponent } from './country/add/delete/delete.component';
 import { CountryService } from './country/country.service';
+
+import { BranchComponent } from './branch/branch.component';
+import { AddBranchFormComponent } from './branch/add/add-form/add-form.component';
+import { BranchService } from './branch/branch.service';
+
+import { ReligionComponent } from './religion/religion.component';
+import { AddReligionFormComponent } from './religion/add/add-form/add-form.component';
+import { ReligionService } from './religion/religion.service';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from './../../shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -33,7 +41,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
     CountryComponent,
     AddFormComponent,
-    DeleteDialogComponent,
+    BranchComponent,
+    AddBranchFormComponent,
+    ReligionComponent,
+    AddReligionFormComponent
   ],
   imports: [
     CommonModule,
@@ -61,6 +72,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ComponentsModule,
     SharedModule,
   ],
-  providers: [CountryService],
+  providers: [
+    {provide:CountryService},
+    {provide:BranchService},
+    {provide:ReligionService},
+    /*CountryService,
+              BranchService*/],
 })
 export class SettingsModule {}

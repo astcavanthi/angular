@@ -196,7 +196,7 @@ export const ROUTES: RouteInfo[] = [
         role: [''],
         submenu: [],
       },
-      
+
     ],
   },/*
   {
@@ -610,8 +610,30 @@ export const ROUTES: RouteInfo[] = [
         role: [''],
         submenu: [],
       },
-      
-
+      {
+        path: '/admin/settings/branch',
+        title: 'MENUITEMS.SETTINGS.LIST.BRANCHS',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
+      {
+        path: '/admin/settings/religion',
+        title: 'MENUITEMS.SETTINGS.LIST.RELIGIONS',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
      /* {
         path: '/admin/departments/add-department',
         title: 'MENUITEMS.DEPARTMENTS.LIST.ADD-DEPARTMENT',
@@ -1181,7 +1203,7 @@ export const ROUTES: RouteInfo[] = [
       },
     ],
   },*/
-/*  {
+  {
     path: '',
     title: 'Components',
     iconType: '',
@@ -1985,5 +2007,5 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
     ],
-  },*/
+  },
 ];

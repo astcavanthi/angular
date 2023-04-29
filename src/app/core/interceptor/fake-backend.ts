@@ -9,11 +9,11 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { User } from '../models/user';
+import {LoginUserDetails} from '../models/loginResponse';
 import { Role } from '../models/role';
 
-const users: User[] = [
-  {
+const users: LoginUserDetails[] = [
+  /*{
     id: 1,
     img: 'assets/images/user/admin.jpg',
     username: 'admin@annapurnamarriages.com',
@@ -42,7 +42,7 @@ const users: User[] = [
     lastName: 'Cox',
     role: Role.Student,
     token: 'student-token',
-  },
+  },*/
 ];
 
 @Injectable()
@@ -82,7 +82,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,
-        token: user.token,
+        token:"sss"
       });
     }
 

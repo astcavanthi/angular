@@ -71,8 +71,10 @@
     "SETTINGS": {
       "TEXT": "Settings",
       "LIST": {
-        "COUNTRYS": "Country"
-        
+        "COUNTRYS": "Country",
+        "BRANCHS": "Branch",
+        "RELIGIONS": "Religion"
+
       }
     },
     "STAFF": {

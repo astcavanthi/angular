@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CountryService } from './country.service';
+import {ReligionService } from './religion.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Country } from './country.model';
+import { Religion } from './religion.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -13,48 +13,47 @@ import {
 } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AddFormComponent } from './add/add-form/add-form.component';
-// import { DeleteDialogComponent } from './add/delete/delete.component';
+import { AddReligionFormComponent } from './add/add-form/add-form.component';
+
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from './../../../shared/UnsubscribeOnDestroyAdapter';
 import { Direction } from '@angular/cdk/bidi';
 import { TableExportUtil } from 'src/app/shared/tableExportUtil';
 import { TableElement } from 'src/app/shared/TableElement';
-import {ThemePalette} from "@angular/material/core";
+
 
 @Component({
-  selector: 'app-country',
-  templateUrl: './country.component.html',
-  styleUrls: ['./country.component.scss'],
+  selector: 'app-religion',
+  templateUrl: './religion.component.html',
+  styleUrls: ['./religion.component.scss'],
 })
-export class CountryComponent
+export class  ReligionComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
   displayedColumns = [
     'select',
-    'code',
     'name',
     'status',
     'actions',
   ];
-  exampleDatabase?: CountryService;
+  exampleDatabase?:  ReligionService;
   dataSource!: ExampleDataSource;
-  selection = new SelectionModel<Country>(true, []);
+  selection = new SelectionModel<Religion>(true, []);
   id?: number;
-  country?: Country;
+  religion?: Religion;
   breadscrums = [
     {
-      title: 'All Countries',
-      items: ['Country'],
+      title: 'All Religion',
+      items: [' Religion'],
       active: 'All',
     },
   ];
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public countryService: CountryService,
+    public religionService:  ReligionService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -79,9 +78,9 @@ export class CountryComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddFormComponent, {
+    const dialogRef = this.dialog.open(AddReligionFormComponent, {
       data: {
-        country: this.country,
+        religion: this.religion,
         action: 'add',
       },
       direction: tempDirection,
@@ -91,11 +90,11 @@ export class CountryComponent
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
         this.exampleDatabase?.dataChange.value.push(
-          {...this.countryService.getDialogData(), status: 1}
+          {...this.religionService.getDialogData(), status: 1}
         );
-       /* this.exampleDatabase?.dataChange.value.unshift(
-          {...this.countryService.getDialogData(), status: 1}
-        );*/
+        /* this.exampleDatabase?.dataChange.value.unshift(
+           {...this.countryService.getDialogData(), status: 1}
+         );*/
         this.refreshTable();
         this.showNotification(
           'snackbar-success',
@@ -106,7 +105,7 @@ export class CountryComponent
       }
     });
   }
-  editCall(row: Country) {
+  editCall(row: Religion) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -114,9 +113,9 @@ export class CountryComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddFormComponent, {
+    const dialogRef = this.dialog.open(AddReligionFormComponent, {
       data: {
-        country: row,
+        religion: row,
         action: 'edit',
       },
       direction: tempDirection,
@@ -130,8 +129,8 @@ export class CountryComponent
         // Then you update that record using data from dialogData (values you enetered)
 
         if (foundIndex != null && this.exampleDatabase) {
-           this.exampleDatabase.dataChange.value[foundIndex] =
-             this.countryService.getDialogData();
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.religionService.getDialogData();
           // And lastly refresh table
 
           this.refreshTable();
@@ -145,10 +144,7 @@ export class CountryComponent
       }
     });
   }
-
-
-
-  deleteItem(row: Country) {
+  deleteItem(row: Religion) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -156,32 +152,32 @@ export class CountryComponent
     } else {
       tempDirection = 'ltr';
     }
-   /* const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: row,
-      direction: tempDirection,
-    });*/
+    /* const dialogRef = this.dialog.open(DeleteDialogComponent, {
+       data: row,
+       direction: tempDirection,
+     });*/
     // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
     //   if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.countryService.deleteCountry(this.id);
-          this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          this.showNotification(
-            'snackbar-danger',
-            'Delete Record Successfully...!!!',
-            'top',
-            'center'
-          );
-        }
+    const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+      (x) => x.id === this.id
+    );
+    // for delete we use splice in order to remove single object from DataService
+    if (foundIndex != null && this.exampleDatabase) {
+      this.religionService.deleteReligion(this.id);
+      this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+      this.refreshTable();
+      this.showNotification(
+        'snackbar-danger',
+        'Delete Record Successfully...!!!',
+        'top',
+        'center'
+      );
+    }
     //   }
     // });
   }
 
-  statusItem(row: Country) {
+  statusItem(row: Religion) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -193,27 +189,26 @@ export class CountryComponent
     //   data: row,
     //   direction: tempDirection,
     // });
-   // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-   //   if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.countryService.statusCountry(this.id);
-          // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          this.showNotification(
-            'snackbar-info',
-            'Status Updated Successfully...!!!',
-            'top',
-            'center'
-          );
-        }
+    // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+    //   if (result === 1) {
+    const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+      (x) => x.id === this.id
+    );
+    // for delete we use splice in order to remove single object from DataService
+    if (foundIndex != null && this.exampleDatabase) {
+      this.religionService.statusReligion(this.id);
+      // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+      this.refreshTable();
+      this.showNotification(
+        'snackbar-info',
+        'Status Updated Successfully...!!!',
+        'top',
+        'center'
+      );
+    }
     //  }
-   // });
+    // });
   }
-
 
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
@@ -244,17 +239,17 @@ export class CountryComponent
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       // this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
-      this.selection = new SelectionModel<Country>(true, []);
+      this.selection = new SelectionModel<Religion>(true, []);
     });
     this.showNotification(
       'snackbar-danger',
       totalSelect + ' Record Delete Successfully...!!!',
-      'top',
+      'bottom',
       'center'
     );
   }
   public loadData() {
-    this.exampleDatabase = new CountryService(this.httpClient);
+    this.exampleDatabase = new  ReligionService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -274,8 +269,7 @@ export class CountryComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        'Code': x.code,
-        'Country Name': x.name,
+        ' Religion Name': x.name,
         'Status': x.status,
       }));
 
@@ -295,7 +289,7 @@ export class CountryComponent
     });
   }
   // context menu
-  onContextMenu(event: MouseEvent, item: Country) {
+  onContextMenu(event: MouseEvent, item:  Religion) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -306,7 +300,7 @@ export class CountryComponent
     }
   }
 }
-export class ExampleDataSource extends DataSource<Country> {
+export class ExampleDataSource extends DataSource< Religion> {
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -314,11 +308,10 @@ export class ExampleDataSource extends DataSource<Country> {
   set filter(filter: string) {
     this.filterChange.next(filter);
   }
-  color: ThemePalette = 'accent';
-  filteredData: Country[] = [];
-  renderedData: Country[] = [];
+  filteredData:  Religion[] = [];
+  renderedData:  Religion[] = [];
   constructor(
-    public exampleDatabase: CountryService,
+    public exampleDatabase:  ReligionService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
@@ -327,7 +320,7 @@ export class ExampleDataSource extends DataSource<Country> {
     this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Country[]> {
+  connect(): Observable<Religion[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this.exampleDatabase.dataChange,
@@ -335,17 +328,16 @@ export class ExampleDataSource extends DataSource<Country> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getCountry();
+    this.exampleDatabase.getReligion();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
         this.filteredData = this.exampleDatabase.data
           .slice()
-          .filter((country: Country) => {
+          .filter((religion:  Religion) => {
             const searchStr = (
-              country.code +
-              country.name +
-              country.status
+              religion.name +
+              religion.status
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -365,7 +357,7 @@ export class ExampleDataSource extends DataSource<Country> {
     // disconnect
   }
   /** Returns a sorted copy of the database data. */
-  sortData(data: Country[]): Country[] {
+  sortData(data: Religion[]):  Religion[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -373,9 +365,6 @@ export class ExampleDataSource extends DataSource<Country> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
       switch (this._sort.active) {
-        case 'code':
-          [propertyA, propertyB] = [a.code, b.code];
-          break;
         case 'name':
           [propertyA, propertyB] = [a.name, b.name];
           break;
