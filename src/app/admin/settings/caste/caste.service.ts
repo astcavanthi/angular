@@ -3,10 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { Caste,CasteResponse } from './caste.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import {environment} from 'src/environments/environment';
 import {Branch} from "../branch/branch.model";
 @Injectable()
 export class CasteService extends UnsubscribeOnDestroyAdapter {
-  private API_URL = 'http://127.0.0.1:8000/';
+ // private API_URL = 'http://127.0.0.1:8000/';
   isTblLoading = true;
   dataChange: BehaviorSubject<Caste[]> = new BehaviorSubject<Caste[]>(
     []
@@ -24,7 +25,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getCaste(): void {
-    this.subs.sink = this.httpClient.get<CasteResponse>(this.API_URL+"masters/caste/")
+    this.subs.sink = this.httpClient.get<CasteResponse>(environment.apiUrl+"masters/caste/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -39,7 +40,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   addCaste(caste: Caste): void {
     this.dialogData = caste;
 
-    this.httpClient.post(this.API_URL+"masters/caste/", caste)
+    this.httpClient.post(environment.apiUrl+"masters/caste/", caste)
       .subscribe({
         next: (data) => {
           this.dialogData = caste;
@@ -51,7 +52,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
   updateCaste(caste: Caste): void {
     this.dialogData = caste;
-    this.httpClient.put(this.API_URL + "masters/caste/", caste)
+    this.httpClient.put(environment.apiUrl + "masters/caste/", caste)
       .subscribe({
         next: (data) => {
           this.dialogData = caste;
@@ -63,7 +64,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
   deleteCaste(id: number): void {
 
-    this.httpClient.delete(this.API_URL+"masters/caste/" + id)
+    this.httpClient.delete(environment.apiUrl+"masters/caste/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -75,7 +76,7 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusCaste(id: number): void {
-    this.httpClient.patch(this.API_URL+"masters/caste/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"masters/caste/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

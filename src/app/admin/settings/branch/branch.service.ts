@@ -3,10 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { Branch,BranchResponse } from './branch.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import {environment} from 'src/environments/environment';
 import {Country} from "../country/country.model";
 @Injectable()
 export class BranchService extends UnsubscribeOnDestroyAdapter {
-  private API_URL = 'http://127.0.0.1:8000/';
+  //private API_URL = 'http://127.0.0.1:8000/';
   isTblLoading = true;
   dataChange: BehaviorSubject<Branch[]> = new BehaviorSubject<Branch[]>(
     []
@@ -24,7 +25,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getBranch(): void {
-    this.subs.sink = this.httpClient.get<BranchResponse>(this.API_URL+"masters/branch/")
+    this.subs.sink = this.httpClient.get<BranchResponse>(environment.apiUrl+"masters/branch/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -39,7 +40,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   addBranch(branch: Branch): void {
     this.dialogData = branch;
 
-    this.httpClient.post(this.API_URL+"masters/branch/", branch)
+    this.httpClient.post(environment.apiUrl+"masters/branch/", branch)
       .subscribe({
         next: (data) => {
           this.dialogData = branch;
@@ -51,7 +52,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
   updateBranch(branch: Branch): void {
     this.dialogData = branch;
-    this.httpClient.put(this.API_URL + "masters/branch/", branch)
+    this.httpClient.put(environment.apiUrl + "masters/branch/", branch)
       .subscribe({
         next: (data) => {
           this.dialogData = branch;
@@ -63,7 +64,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
   deleteBranch(id: number): void {
 
-    this.httpClient.delete(this.API_URL+"masters/branch/" + id)
+    this.httpClient.delete(environment.apiUrl+"masters/branch/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -75,7 +76,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusBranch(id: number): void {
-    this.httpClient.patch(this.API_URL+"masters/branch/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"masters/branch/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

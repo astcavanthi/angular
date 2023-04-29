@@ -3,9 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 import { Religion,ReligionResponse } from './religion.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import {environment} from 'src/environments/environment';
 @Injectable()
 export class ReligionService extends UnsubscribeOnDestroyAdapter {
-  private API_URL = 'http://127.0.0.1:8000/';
+  //private API_URL = 'http://127.0.0.1:8000/';
   isTblLoading = true;
   dataChange: BehaviorSubject<Religion[]> = new BehaviorSubject<Religion[]>(
     []
@@ -23,7 +24,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getReligion(): void {
-    this.subs.sink = this.httpClient.get<ReligionResponse>(this.API_URL+"masters/religion/")
+    this.subs.sink = this.httpClient.get<ReligionResponse>(environment.apiUrl+"masters/religion/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -38,7 +39,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   addReligion(religion: Religion): void {
     this.dialogData = religion;
 
-    this.httpClient.post(this.API_URL+"masters/religion/", religion)
+    this.httpClient.post(environment.apiUrl+"masters/religion/", religion)
       .subscribe({
         next: (data) => {
           this.dialogData = religion;
@@ -51,7 +52,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   updateReligion(religion: Religion): void {
     this.dialogData = religion;
 
-    this.httpClient.put(this.API_URL + "masters/religion/", religion)
+    this.httpClient.put(environment.apiUrl+ "masters/religion/", religion)
       .subscribe({
         next: (data) => {
           this.dialogData = religion;
@@ -64,7 +65,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   deleteReligion(id: number): void {
     console.log(id);
 
-    this.httpClient.delete(this.API_URL+"masters/religion/" + id)
+    this.httpClient.delete(environment.apiUrl+"masters/religion/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -76,7 +77,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusReligion(id: number): void {
-    this.httpClient.patch(this.API_URL+"masters/religion/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"masters/religion/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

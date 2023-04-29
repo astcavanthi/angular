@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Country, CountryResponse} from './country.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {environment} from 'src/environments/environment';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 @Injectable()
 export class CountryService extends UnsubscribeOnDestroyAdapter {
    // private readonly API_URL = 'assets/data/country.json';
-  private API_URL = 'http://127.0.0.1:8000/';
+  //private API_URL = 'http://127.0.0.1:8000/';
   isTblLoading = true;
   dataChange: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>(
     []
@@ -24,7 +25,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getCountry(): void {
-    this.subs.sink = this.httpClient.get<CountryResponse>(this.API_URL+"masters/country/")
+    this.subs.sink = this.httpClient.get<CountryResponse>(environment.apiUrl+"masters/country/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -39,7 +40,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   addCountry(country: Country): void {
     this.dialogData = country;
 
-    this.httpClient.post(this.API_URL+"masters/country/", country)
+    this.httpClient.post(environment.apiUrl+"masters/country/", country)
       .subscribe({
         next: (data) => {
           this.dialogData = country;
@@ -51,7 +52,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
   updateCountry(country: Country): void {
     this.dialogData = country;
-    this.httpClient.put(this.API_URL + "masters/country/", country)
+    this.httpClient.put(environment.apiUrl + "masters/country/", country)
         .subscribe({
           next: (data) => {
             this.dialogData = country;
@@ -63,7 +64,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
   deleteCountry(id: number): void {
 
-    this.httpClient.delete(this.API_URL+"masters/country/" + id)
+    this.httpClient.delete(environment.apiUrl+"masters/country/" + id)
         .subscribe({
           next: (data) => {
             console.log(id);
@@ -75,7 +76,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   }
 
   statusCountry(id: number): void {
-    this.httpClient.patch(this.API_URL+"masters/country/" + id,{},{})
+    this.httpClient.patch(environment.apiUrl+"masters/country/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);
