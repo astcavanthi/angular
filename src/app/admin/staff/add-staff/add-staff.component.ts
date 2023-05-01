@@ -20,16 +20,25 @@ export class AddStaffComponent {
   ];
   constructor(private fb: UntypedFormBuilder) {
     this.staffForm = this.fb.group({
-      first: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      last: [''],
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      surname: [''],
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
+      matrialStatus : [''],
+      officemobile : [''],
+      state : [''],
+      city : [''],
+      branch : [''],
       password: ['', [Validators.required]],
       conformPassword: ['', [Validators.required]],
       designation: [''],
       department: [''],
       address: [''],
       email: [
+        '',
+        [Validators.required, Validators.email, Validators.minLength(5)],
+      ],
+      personalemail: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
