@@ -4,6 +4,9 @@ import { CountryComponent } from './country/country.component';
 import { BranchComponent } from './branch/branch.component';
 import { ReligionComponent} from "./religion/religion.component";
 import { CasteComponent} from "./caste/caste.component";
+import { OccupationComponent } from "./occupation/occupation.component";
+import { EducationdetailsComponent } from "./educationdetails/educationdetails.component";
+import {LanguagesComponent} from "./languages/languages.component";
 
 const routes: Routes = [
 
@@ -22,6 +25,18 @@ const routes: Routes = [
   {
     path: 'caste',
     component: CasteComponent
+  },
+  {
+    path: 'occupation',
+    component: OccupationComponent
+  },
+  {
+    path: 'education',
+    component: EducationdetailsComponent
+  },
+  {
+    path: 'language',
+    component: LanguagesComponent
   },
 ];
 

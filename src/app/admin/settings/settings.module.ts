@@ -36,6 +36,17 @@ import { CasteComponent} from "./caste/caste.component";
 import {AddCasteFormComponent} from './caste/add/add-form/add-form.component';
 import {CasteService} from "./caste/caste.service";
 
+import { OccupationComponent } from './occupation/occupation.component';
+import {OccupationService} from "./occupation/occupation.service";
+import {AddOccupationFormComponent} from './occupation/add/add-form/add-form.component';
+
+import { EducationdetailsComponent } from './educationdetails/educationdetails.component';
+import {EducationdetailsService} from "./educationdetails/educationdetails.service";
+import {AddEducationdetailsFormComponent} from "./educationdetails/add/add-form/add-form.component";
+
+import { LanguagesComponent } from './languages/languages.component';
+import {LanguagesService} from "./languages/languages.service";
+import {AddLanguageFormComponent} from "./languages/add/add-form/add-form.component";
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from './../../shared/components/components.module';
@@ -51,7 +62,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReligionComponent,
     AddReligionFormComponent,
     CasteComponent,
-    AddCasteFormComponent
+    AddCasteFormComponent,
+    OccupationComponent,
+    AddOccupationFormComponent,
+    EducationdetailsComponent,
+    AddEducationdetailsFormComponent,
+    LanguagesComponent,
+    AddLanguageFormComponent,
   ],
   imports: [
     CommonModule,
@@ -84,6 +101,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     {provide:BranchService},
     {provide:ReligionService},
     {provide:CasteService},
+    {provide:OccupationService},
+    {provide:EducationdetailsService},
+    {provide:LanguagesService},
     /*CountryService,
               BranchService*/],
 })

@@ -74,7 +74,10 @@
         "COUNTRYS": "Country",
         "BRANCHS": "Branch",
         "RELIGIONS": "Religion",
-        "CASTES": "Caste"
+        "CASTES": "Caste",
+        "OCCUPATIONS": "Occupation",
+        "EDUCATIONS": "Education",
+        "LANGUAGES": "Language"
 
       }
     },

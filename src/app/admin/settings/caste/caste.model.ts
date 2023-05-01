@@ -1,4 +1,3 @@
-import {Branch} from "../branch/branch.model";
 
 export class CasteResponse{
   data : Caste[]=[];
