@@ -48,6 +48,10 @@ import { LanguagesComponent } from './languages/languages.component';
 import {LanguagesService} from "./languages/languages.service";
 import {AddLanguageFormComponent} from "./languages/add/add-form/add-form.component";
 
+import {SourceComponent} from "./source/source.component";
+import {SourceService} from "./source/source.service";
+import {AddSourceFormComponent} from "./source/add/add-form/add-form.component";
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from './../../shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -69,6 +73,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     AddEducationdetailsFormComponent,
     LanguagesComponent,
     AddLanguageFormComponent,
+    SourceComponent,
+    AddSourceFormComponent,
   ],
   imports: [
     CommonModule,
@@ -104,6 +110,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     {provide:OccupationService},
     {provide:EducationdetailsService},
     {provide:LanguagesService},
+    {provide:SourceService},
     /*CountryService,
               BranchService*/],
 })

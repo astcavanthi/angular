@@ -77,7 +77,8 @@
         "CASTES": "Caste",
         "OCCUPATIONS": "Occupation",
         "EDUCATIONS": "Education",
-        "LANGUAGES": "Language"
+        "LANGUAGES": "Language",
+        "SOURCES": "Source"
 
       }
     },

@@ -7,6 +7,7 @@ import { CasteComponent} from "./caste/caste.component";
 import { OccupationComponent } from "./occupation/occupation.component";
 import { EducationdetailsComponent } from "./educationdetails/educationdetails.component";
 import {LanguagesComponent} from "./languages/languages.component";
+import {SourceComponent} from "./source/source.component";
 
 const routes: Routes = [
 
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'language',
     component: LanguagesComponent
+  },
+  {
+    path: 'source',
+    component: SourceComponent
   },
 ];
 
