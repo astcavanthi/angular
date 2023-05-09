@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject,Observable } from 'rxjs';
 import {Country, CountryResponse} from './country.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {environment} from 'src/environments/environment';
@@ -12,6 +12,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>(
     []
   );
+  public countries$: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>([]);
   // Temporarily stores data from dialogs
   dialogData!: Country;
   constructor(private httpClient: HttpClient) {
@@ -37,9 +38,21 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
       },
     });
   }
+
+  getCountries() {
+   this.httpClient.get<CountryResponse>(environment.apiUrl+"/masters/country/")
+    .subscribe({
+              next : (data1) => {
+                this.countries$.next(data1.data);
+              },
+              error: (error: HttpErrorResponse) => {
+                console.log(error.name + ' ' + error.message);
+              },
+          });
+  }
+
   addCountry(country: Country): void {
     this.dialogData = country;
-
     this.httpClient.post(environment.apiUrl+"/masters/country/", country)
       .subscribe({
         next: (data) => {
@@ -50,6 +63,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+
   updateCountry(country: Country): void {
     this.dialogData = country;
     this.httpClient.put(environment.apiUrl + "/masters/country/", country)
@@ -60,10 +74,10 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
           error: (error: HttpErrorResponse) => {
             console.log(error);
           },
-        });
+      });
   }
-  deleteCountry(id: number): void {
 
+  deleteCountry(id: number): void {
     this.httpClient.delete(environment.apiUrl+"/masters/country/" + id)
         .subscribe({
           next: (data) => {

@@ -72,6 +72,9 @@
       "TEXT": "Settings",
       "LIST": {
         "COUNTRYS": "Country",
+        "STATES": "State",
+        "DISTRICTS": "District",
+        "CITIES" : "City",
         "BRANCHS": "Branch",
         "RELIGIONS": "Religion",
         "CASTES": "Caste",

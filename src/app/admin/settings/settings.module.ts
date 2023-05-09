@@ -52,6 +52,18 @@ import {SourceComponent} from "./source/source.component";
 import {SourceService} from "./source/source.service";
 import {AddSourceFormComponent} from "./source/add/add-form/add-form.component";
 
+import {StateComponent} from "./state/state.component";
+import {StateService} from "./state/state.service";
+import {AddStateFormComponent} from "./state/add/add-form/add-form.component";
+
+import { DistrictComponent } from './district/district.component';
+import { DistrictService } from './district/district.service';
+import { AddDistrictFormComponent } from './district/add/add-form/add-form.component';
+
+import { CityComponent } from './city/city.component';
+import { CityService } from './city/city.service';
+import { AddCityFormComponent } from './city/add/add-form/add-form.component';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from './../../shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -75,6 +87,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     AddLanguageFormComponent,
     SourceComponent,
     AddSourceFormComponent,
+    StateComponent,
+    AddStateFormComponent,
+    DistrictComponent,
+    AddDistrictFormComponent,
+    CityComponent,
+    AddCityFormComponent
   ],
   imports: [
     CommonModule,
@@ -111,6 +129,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     {provide:EducationdetailsService},
     {provide:LanguagesService},
     {provide:SourceService},
+    {provide:StateService},
+    {provide:DistrictService},
+    {provide:CityService}
     /*CountryService,
               BranchService*/],
 })

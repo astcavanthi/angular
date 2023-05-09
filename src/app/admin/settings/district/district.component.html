@@ -12,12 +12,12 @@
             <div class="left">
               <ul class="header-buttons-left ms-0">
                 <li class="tbl-title">
-                  <h2>Sources</h2>
+                  <h2>Districts</h2>
                 </li>
                 <li class="tbl-search-box">
                   <label for="search-input"><i class="material-icons search-icon">search</i></label>
                   <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                         aria-label="Search box">
+                    aria-label="Search box">
                 </li>
               </ul>
             </div>
@@ -60,25 +60,35 @@
                 <ng-container matColumnDef="select">
                   <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-7'">
                     <mat-checkbox (change)="$event ? masterToggle() : null"
-                                  [checked]="selection.hasValue() && isAllSelected()"
-                                  [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-7'">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                                  [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
+                      [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
                   </mat-cell>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="code">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>code</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
                   <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Source Name</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>District Name</mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Source Name:</span> {{row.name}}</mat-cell>
+                    <span class="mobile-label">District Name:</span> {{row.name}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="state_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>State Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">State Name:</span> {{row.state_name}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="country_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Country Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Country Name:</span>{{row.country_name}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Status
@@ -94,11 +104,11 @@
                   <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
                   <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
                     <button mat-icon-button (click)="$event.stopPropagation()" (click)="editCall(row)"
-                            class="tbl-action-btn">
+                      class="tbl-action-btn">
                       <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                     </button>
                     <button mat-icon-button (click)="$event.stopPropagation()" (click)="deleteItem(row)"
-                            class="tbl-action-btn">
+                      class="tbl-action-btn">
                       <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                     </button>
                   </mat-cell>
@@ -106,7 +116,7 @@
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
                 <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editCall(row)"
-                         [style.cursor]="'pointer'" matRipple>
+                  [style.cursor]="'pointer'" matRipple>
                 </mat-row>
               </table>
               <!-- Loading spinner -->
@@ -116,7 +126,7 @@
               </div>
               <!-- context menu start -->
               <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
-                   [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+                [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
               </div>
               <mat-menu #contextMenu="matMenu">
                 <ng-template matMenuContent let-item="item">
@@ -162,11 +172,11 @@
               </mat-menu>
               <!-- context menu end -->
               <div *ngIf="!exampleDatabase?.isTblLoading" class="no-results"
-                   [style.display]="dataSource.renderedData.length === 0 ? '' : 'none'">
+                [style.display]="dataSource.renderedData.length === 0 ? '' : 'none'">
                 No results
               </div>
               <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
-                             [pageSizeOptions]="[5, 10, 25, 100]">
+                [pageSizeOptions]="[5, 10, 25, 100]">
               </mat-paginator>
             </div>
           </div>
@@ -175,5 +185,3 @@
     </div>
   </div>
 </section>
-
-
