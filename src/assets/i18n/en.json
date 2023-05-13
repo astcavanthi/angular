@@ -6,7 +6,7 @@
     "DASHBOARD": {
       "TEXT": "Dashboard",
       "LIST": {
-        "DASHBOARD1": "Dashboard 1",
+        "DASHBOARD1": "Dashboard",
         "DASHBOARD2": "Dashboard 2",
         "TEACHER-DASHBOARD": "Teacher Dashboard",
         "STUDENT-DASHBOARD": "Student Dashboard"
@@ -78,6 +78,7 @@
         "BRANCHS": "Branch",
         "RELIGIONS": "Religion",
         "CASTES": "Caste",
+        "SUBCASTES": "Sub-Caste",
         "OCCUPATIONS": "Occupation",
         "EDUCATIONS": "Education",
         "LANGUAGES": "Language",
@@ -86,7 +87,7 @@
       }
     },
     "STAFF": {
-      "TEXT": "Staff(User)",
+      "TEXT": "Staff",
       "LIST": {
         "ALL-STAFF": "All Staff",
         "ADD-STAFF": "Add Staff",

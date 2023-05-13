@@ -90,6 +90,7 @@ export class  StateComponent
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
+        if(this.stateService.failureCode === 0){
         this.exampleDatabase?.dataChange.value.push(
           {...this.stateService.getDialogData(), status: 1}
         );
@@ -104,6 +105,15 @@ export class  StateComponent
           'center'
         );
       }
+      else{
+        this.showNotification(
+          'snackbar-danger',
+          'Same state code already inserted...!!!',
+          'top',
+          'center'
+        );
+      }
+    }
     });
   }
   editCall(row: State) {

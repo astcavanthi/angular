@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CountryService } from './country.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -90,20 +90,33 @@ export class CountryComponent
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
-        this.exampleDatabase?.dataChange.value.push(
-          {...this.countryService.getDialogData(), status: 1}
-        );
-       /* this.exampleDatabase?.dataChange.value.unshift(
-          {...this.countryService.getDialogData(), status: 1}
-        );*/
-        this.refreshTable();
-        this.showNotification(
-          'snackbar-success',
-          'Add Record Successfully...!!!',
-          'top',
-          'center'
-        );
+        console.log(this.countryService.failureCode);
+        if(this.countryService.failureCode === 0){
+          this.exampleDatabase?.dataChange.value.push(
+            {...this.countryService.getDialogData(), status: 1}
+          );
+         /* this.exampleDatabase?.dataChange.value.unshift(
+            {...this.countryService.getDialogData(), status: 1}
+          );*/
+  
+          this.refreshTable();
+          this.showNotification(
+            'snackbar-success',
+            'Add Record Successfully...!!!',
+            'top',
+            'center'
+          );
+        }
+        else{
+          this.showNotification(
+            'snackbar-danger',
+            'Same country code already inserted...!!!',
+            'top',
+            'center'
+          );
+        }
       }
+      
     });
   }
   editCall(row: Country) {

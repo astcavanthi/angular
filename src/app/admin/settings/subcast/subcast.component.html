@@ -12,7 +12,7 @@
             <div class="left">
               <ul class="header-buttons-left ms-0">
                 <li class="tbl-title">
-                  <h2>Cities</h2>
+                  <h2>Sub-Castes</h2>
                 </li>
                 <li class="tbl-search-box">
                   <label for="search-input"><i class="material-icons search-icon">search</i></label>
@@ -71,29 +71,15 @@
                   </mat-cell>
                 </ng-container>
                 <!-- ID Column -->
-                <ng-container matColumnDef="code">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row.code}}</mat-cell>
-                </ng-container>
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>City Name</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Sub-Caste Name</mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">City Name:</span> {{row.name}}</mat-cell>
+                    <span class="mobile-label">Sub-Caste Name:</span> {{row.name}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="district_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>District Name</mat-header-cell>
+                <ng-container matColumnDef="caste_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Caste Name</mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">District Name:</span> {{row.district_name}}</mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="state_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>State Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">State Name:</span> {{row.state_name}}</mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="country_name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Country Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Country Name:</span>{{row.country_name}}</mat-cell>
+                    <span class="mobile-label">Caste Name:</span>{{row.caste_name}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Status
@@ -190,4 +176,5 @@
     </div>
   </div>
 </section>
+
 

@@ -1,32 +1,30 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Caste,CasteResponse } from './caste.model';
+import { SubCaste,SubCasteResponse } from './subcast.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import {environment} from 'src/environments/environment';
-import {Branch} from "../branch/branch.model";
 @Injectable()
-export class CasteService extends UnsubscribeOnDestroyAdapter {
+export class SubCasteService extends UnsubscribeOnDestroyAdapter {
  // private API_URL = 'http://127.0.0.1:8000/';
   isTblLoading = true;
-  dataChange: BehaviorSubject<Caste[]> = new BehaviorSubject<Caste[]>(
+  dataChange: BehaviorSubject<SubCaste[]> = new BehaviorSubject<SubCaste[]>(
     []
   );
-  public castes$: BehaviorSubject<Caste[]> = new BehaviorSubject<Caste[]>([]);
   // Temporarily stores data from dialogs
-  dialogData!: Caste;
+  dialogData!: SubCaste;
   constructor(private httpClient: HttpClient) {
     super();
   }
-  get data(): Caste[] {
+  get data(): SubCaste[] {
     return this.dataChange.value;
   }
   getDialogData() {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getCaste(): void {
-    this.subs.sink = this.httpClient.get<CasteResponse>(environment.apiUrl+"/masters/caste/")
+  getSubCaste(): void {
+    this.subs.sink = this.httpClient.get<SubCasteResponse>(environment.apiUrl+"/masters/subcaste/")
       .subscribe({
       next: (data) => {
         this.isTblLoading = false;
@@ -38,50 +36,34 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
       },
     });
   }
+  addSubCaste(subcaste: SubCaste): void {
+    this.dialogData = subcaste;
 
-  
-  getCastes() {
-    this.httpClient.get<CasteResponse>(environment.apiUrl+"/masters/caste/")
-     .subscribe({
-               next : (data1) => {
-                 this.castes$.next(data1.data);
-               },
-               error: (error: HttpErrorResponse) => {
-                 console.log(error.name + ' ' + error.message);
-               },
-           });
-   }
-   
-
-
-  addCaste(caste: Caste): void {
-    this.dialogData = caste;
-
-    this.httpClient.post(environment.apiUrl+"/masters/caste/", caste)
+    this.httpClient.post(environment.apiUrl+"/masters/subcaste/", subcaste)
       .subscribe({
         next: (data) => {
-          this.dialogData = caste;
+          this.dialogData = subcaste;
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
         },
       });
   }
-  updateCaste(caste: Caste): void {
-    this.dialogData = caste;
-    this.httpClient.put(environment.apiUrl + "/masters/caste/", caste)
+  updateSubCaste(subcaste: SubCaste): void {
+    this.dialogData = subcaste;
+    this.httpClient.put(environment.apiUrl + "/masters/subcaste/", subcaste)
       .subscribe({
         next: (data) => {
-          this.dialogData = caste;
+          this.dialogData = subcaste;
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
         },
       });
   }
-  deleteCaste(id: number): void {
+  deleteSubCaste(id: number): void {
 
-    this.httpClient.delete(environment.apiUrl+"/masters/caste/" + id)
+    this.httpClient.delete(environment.apiUrl+"/masters/subcaste/" + id)
       .subscribe({
         next: (data) => {
           console.log(id);
@@ -92,8 +74,8 @@ export class CasteService extends UnsubscribeOnDestroyAdapter {
       });
   }
 
-  statusCaste(id: number): void {
-    this.httpClient.patch(environment.apiUrl+"/masters/caste/" + id,{},{})
+  statusSubCaste(id: number): void {
+    this.httpClient.patch(environment.apiUrl+"/masters/subcaste/" + id,{},{})
       .subscribe({
         next: (data) => {
           console.log(id);

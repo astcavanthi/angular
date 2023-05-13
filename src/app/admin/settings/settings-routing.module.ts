@@ -11,6 +11,7 @@ import {SourceComponent} from "./source/source.component";
 import {StateComponent} from "./state/state.component";
 import { DistrictComponent } from './district/district.component';
 import { CityComponent } from './city/city.component';
+import { SubCasteComponent } from './subcast/subcast.component';
 
 const routes: Routes = [
 
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'caste',
     component: CasteComponent
+  },
+  {
+    path: 'subcaste',
+    component: SubCasteComponent
   },
   {
     path: 'occupation',

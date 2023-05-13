@@ -13,6 +13,7 @@ export class StateService extends UnsubscribeOnDestroyAdapter {
     []
   );
   public states$: BehaviorSubject<State[]> = new BehaviorSubject<State[]>([]);
+  public failureCode = 0;
   // Temporarily stores data from dialogs
   dialogData!: State;
   constructor(private httpClient: HttpClient) {
@@ -52,14 +53,15 @@ export class StateService extends UnsubscribeOnDestroyAdapter {
    }
 
   addState(state: State): void {
-    console.log(state);
     this.dialogData = state;
+    this.failureCode = 0;
     this.httpClient.post(environment.apiUrl+"/masters/state/", state)
       .subscribe({
         next: (data) => {
           this.dialogData = state;
         },
         error: (error: HttpErrorResponse) => {
+          this.failureCode = 1;
           console.log(error);
         },
       });

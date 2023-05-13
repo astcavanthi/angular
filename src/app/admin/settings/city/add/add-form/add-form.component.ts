@@ -40,7 +40,7 @@ export class AddCityFormComponent {
   cityForm: UntypedFormGroup;
   public countries$: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>([]);
   public states$: BehaviorSubject<State[]> = new BehaviorSubject<State[]>([]);
-  public district$: BehaviorSubject<District[]> = new BehaviorSubject<District[]>([]);
+  public districts$: BehaviorSubject<District[]> = new BehaviorSubject<District[]>([]);
    constructor(
     public httpClient : HttpClient,
     public dialogRef: MatDialogRef<AddCityFormComponent>,
@@ -99,6 +99,13 @@ export class AddCityFormComponent {
     this.stateService.onCountryChangeState(e);
     this.states$ = this.stateService.states$;
    }
+
+   
+   public onCountryStateChangeDistrict(e:any){
+    this.districtService.onCountryStateChangeDistrict(e);
+    this.districts$ = this.districtService.districts$;
+   }
+
   // public onCountryChangeState(e:any){
   //   this.httpClient.get<StateResponse>(environment.apiUrl+"/masters/statecountries/" + e.value)
   //   .subscribe({

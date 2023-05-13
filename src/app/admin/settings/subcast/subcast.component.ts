@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DistrictService } from './district.service';
+import { SubCasteService } from './subcast.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {  District } from './district.model';
+import {  SubCaste } from './subcast.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -13,7 +13,7 @@ import {
 } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AddDistrictFormComponent } from './add/add-form/add-form.component';
+import { AddSubCasteFormComponent } from './add/add-form/add-form.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from './../../../shared/UnsubscribeOnDestroyAdapter';
@@ -22,39 +22,37 @@ import { TableExportUtil } from 'src/app/shared/tableExportUtil';
 import { TableElement } from 'src/app/shared/TableElement';
 
 @Component({
-  selector: 'app-districct',
-  templateUrl: './district.component.html',
-  styleUrls: ['./district.component.scss'],
+  selector: 'app-subcast',
+  templateUrl: './subcast.component.html',
+  styleUrls: ['./subcast.component.scss'],
 })
-export class  DistrictComponent
+export class  SubCasteComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
   displayedColumns = [
     'select',
-    'code',
     'name',
-    'country_name',
-    'state_name',
+    'caste_name',
     'status',
     'actions',
   ];
-  exampleDatabase?:  DistrictService;
+  exampleDatabase?:  SubCasteService;
   dataSource!: ExampleDataSource;
-  selection = new SelectionModel<District>(true, []);
+  selection = new SelectionModel<SubCaste>(true, []);
   id?: number;
-  district?: District;
+  subcaste?: SubCaste;
   breadscrums = [
     {
-      title: 'All District',
-      items: [' District'],
+      title: 'All SubCaste',
+      items: [' SubCaste'],
       active: 'All',
     },
   ];
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public districtService:  DistrictService,
+    public subCasteService:  SubCasteService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -79,9 +77,9 @@ export class  DistrictComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddDistrictFormComponent, {
+    const dialogRef = this.dialog.open(AddSubCasteFormComponent, {
       data: {
-        district: this.district,
+        subcaste: this.subcaste,
         action: 'add',
       },
       direction: tempDirection,
@@ -90,9 +88,8 @@ export class  DistrictComponent
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
-        if(this.districtService.failureCode === 0){
         this.exampleDatabase?.dataChange.value.push(
-          {...this.districtService.getDialogData(), status: 1}
+          {...this.subCasteService.getDialogData(), status: 1}
         );
         /* this.exampleDatabase?.dataChange.value.unshift(
            {...this.countryService.getDialogData(), status: 1}
@@ -100,23 +97,14 @@ export class  DistrictComponent
         this.refreshTable();
         this.showNotification(
           'snackbar-success',
-          'Add District Successfully...!!!',
+          'Add Sub-Caste Successfully...!!!',
           'top',
           'center'
         );
       }
-      else{
-        this.showNotification(
-          'snackbar-danger',
-          'Same district code already inserted...!!!',
-          'top',
-          'center'
-        );
-      }
-    }
     });
   }
-  editCall(row: District) {
+  editCall(row: SubCaste) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -124,9 +112,9 @@ export class  DistrictComponent
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(AddDistrictFormComponent, {
+    const dialogRef = this.dialog.open(AddSubCasteFormComponent, {
       data: {
-        district: row,
+        subcaste: row,
         action: 'edit',
       },
       direction: tempDirection,
@@ -141,13 +129,13 @@ export class  DistrictComponent
 
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value[foundIndex] =
-            this.districtService.getDialogData();
+            this.subCasteService.getDialogData();
           // And lastly refresh table
 
           this.refreshTable();
           this.showNotification(
             'snackbar-success',
-            'Edit District Successfully...!!!',
+            'Edit Sub Caste Successfully...!!!',
             'top',
             'center'
           );
@@ -156,7 +144,7 @@ export class  DistrictComponent
     });
   }
 
-  deleteItem(row: District) {
+  deleteItem(row: SubCaste) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -175,12 +163,12 @@ export class  DistrictComponent
     );
     // for delete we use splice in order to remove single object from DataService
     if (foundIndex != null && this.exampleDatabase) {
-      this.districtService.deleteDistrict(this.id);
+      this.subCasteService.deleteSubCaste(this.id);
       this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
       this.refreshTable();
       this.showNotification(
         'snackbar-danger',
-        'Delete District Successfully...!!!',
+        'Delete Caste Successfully...!!!',
         'top',
         'center'
       );
@@ -189,7 +177,7 @@ export class  DistrictComponent
     // });
   }
 
-  statusItem(row: District) {
+  statusItem(row: SubCaste) {
     this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -208,7 +196,7 @@ export class  DistrictComponent
     );
     // for delete we use splice in order to remove single object from DataService
     if (foundIndex != null && this.exampleDatabase) {
-      this.districtService.statusDistrict(this.id);
+      this.subCasteService.statusSubCaste(this.id);
       // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
       this.refreshTable();
       this.showNotification(
@@ -236,8 +224,8 @@ export class  DistrictComponent
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.renderedData.forEach((row) =>
-        this.selection.select(row)
-      );
+          this.selection.select(row)
+        );
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
@@ -250,7 +238,7 @@ export class  DistrictComponent
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
       // this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
-      this.selection = new SelectionModel<District>(true, []);
+      this.selection = new SelectionModel<SubCaste>(true, []);
     });
     this.showNotification(
       'snackbar-danger',
@@ -260,7 +248,7 @@ export class  DistrictComponent
     );
   }
   public loadData() {
-    this.exampleDatabase = new  DistrictService(this.httpClient);
+    this.exampleDatabase = new  SubCasteService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -280,10 +268,8 @@ export class  DistrictComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        'District code' : x.code,
-        'Districct Name': x.name,
-        'Country' : x.country,
-        'State' : x.state,
+        ' Sub Cast Name': x.name,
+        'Caste Name' : x.caste,
         'Status': x.status,
       }));
 
@@ -303,7 +289,7 @@ export class  DistrictComponent
     });
   }
   // context menu
-  onContextMenu(event: MouseEvent, item:  District) {
+  onContextMenu(event: MouseEvent, item:  SubCaste) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -314,7 +300,7 @@ export class  DistrictComponent
     }
   }
 }
-export class ExampleDataSource extends DataSource<District> {
+export class ExampleDataSource extends DataSource<SubCaste> {
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -322,10 +308,10 @@ export class ExampleDataSource extends DataSource<District> {
   set filter(filter: string) {
     this.filterChange.next(filter);
   }
-  filteredData:  District[] = [];
-  renderedData:  District[] = [];
+  filteredData:  SubCaste[] = [];
+  renderedData:  SubCaste[] = [];
   constructor(
-    public exampleDatabase:  DistrictService,
+    public exampleDatabase:  SubCasteService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
@@ -334,7 +320,7 @@ export class ExampleDataSource extends DataSource<District> {
     this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<District[]> {
+  connect(): Observable<SubCaste[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this.exampleDatabase.dataChange,
@@ -342,19 +328,17 @@ export class ExampleDataSource extends DataSource<District> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getDistrict();
+    this.exampleDatabase.getSubCaste();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
         this.filteredData = this.exampleDatabase.data
           .slice()
-          .filter((district:  District) => {
+          .filter((subcaste:  SubCaste) => {
             const searchStr = (
-              district.code +
-              district.name +
-              district.country_name +
-              district.state_name +
-              district.status
+              subcaste.name +
+              subcaste.caste +
+              subcaste.status
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -374,7 +358,7 @@ export class ExampleDataSource extends DataSource<District> {
     // disconnect
   }
   /** Returns a sorted copy of the database data. */
-  sortData(data: District[]):  District[] {
+  sortData(data: SubCaste[]):  SubCaste[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }
@@ -382,21 +366,16 @@ export class ExampleDataSource extends DataSource<District> {
       let propertyA: number | string = '';
       let propertyB: number | string = '';
       switch (this._sort.active) {
-        case 'code':
-          [propertyA, propertyB] = [a.code, b.code];
-          break;
         case 'name':
           [propertyA, propertyB] = [a.name, b.name];
           break;
-        case 'country_name':
-          [propertyA, propertyB] = [a.country_name, b.country_name];
-          break;
-        case 'state_name':
-          [propertyA, propertyB] = [a.state_name, b.state_name];
+        case 'caste':
+          [propertyA, propertyB] = [a.caste, b.caste];
           break;
         case 'status':
           [propertyA, propertyB] = [a.status, b.status];
           break;
+
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;

@@ -12,6 +12,8 @@ export class DistrictService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<District[]> = new BehaviorSubject<District[]>(
     []
   );
+  public districts$: BehaviorSubject<District[]> = new BehaviorSubject<District[]>([]);
+  public failureCode = 0;
   // Temporarily stores data from dialogs
   dialogData!: District;
   constructor(private httpClient: HttpClient) {
@@ -39,12 +41,14 @@ export class DistrictService extends UnsubscribeOnDestroyAdapter {
   }
   addDistrict(district: District): void {
     this.dialogData = district;
+    this.failureCode = 0;
     this.httpClient.post(environment.apiUrl+"/masters/district/", district)
       .subscribe({
         next: (data) => {
           this.dialogData = district;
         },
         error: (error: HttpErrorResponse) => {
+          this.failureCode =1;
           console.log(error);
         },
       });
@@ -84,5 +88,18 @@ export class DistrictService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+
+
+  public onCountryStateChangeDistrict(e:any){
+    this.httpClient.get<DistrictResponse>(environment.apiUrl+"/masters/districtstatecountries/" + e.value)
+    .subscribe({
+              next : (data1) => {
+                this.districts$.next(data1.data);
+              },
+              error: (error: HttpErrorResponse) => {
+                console.log(error.name + ' ' + error.message);
+              },
+          });
+   }
 
 }

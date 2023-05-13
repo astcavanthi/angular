@@ -13,6 +13,7 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
     []
   );
   public countries$: BehaviorSubject<Country[]> = new BehaviorSubject<Country[]>([]);
+  public failureCode=0;
   // Temporarily stores data from dialogs
   dialogData!: Country;
   constructor(private httpClient: HttpClient) {
@@ -50,15 +51,18 @@ export class CountryService extends UnsubscribeOnDestroyAdapter {
               },
           });
   }
+  
 
   addCountry(country: Country): void {
     this.dialogData = country;
+    this.failureCode=0;
     this.httpClient.post(environment.apiUrl+"/masters/country/", country)
       .subscribe({
         next: (data) => {
           this.dialogData = country;
         },
         error: (error: HttpErrorResponse) => {
+          this.failureCode=1;
            console.log(error);
         },
       });
