@@ -12,6 +12,7 @@ export class SourceService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<Source[]> = new BehaviorSubject<Source[]>(
     []
   );
+  public sources$: BehaviorSubject<Source[]> = new BehaviorSubject<Source[]>([]);
   // Temporarily stores data from dialogs
   dialogData!: Source;
   constructor(private httpClient: HttpClient) {
@@ -86,5 +87,19 @@ export class SourceService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+
+
+  getSources() {
+    this.httpClient.get<SourceResponse>(environment.apiUrl+"/masters/source/")
+     .subscribe({
+               next : (data1) => {
+                 this.sources$.next(data1.data);
+               },
+               error: (error: HttpErrorResponse) => {
+                 console.log(error.name + ' ' + error.message);
+               },
+           });
+   }
+
 
 }

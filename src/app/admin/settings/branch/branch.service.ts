@@ -12,6 +12,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<Branch[]> = new BehaviorSubject<Branch[]>(
     []
   );
+  public branches$: BehaviorSubject<Branch[]> = new BehaviorSubject<Branch[]>([]);
   // Temporarily stores data from dialogs
   dialogData!: Branch;
   constructor(private httpClient: HttpClient) {
@@ -86,5 +87,18 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+
+  getBranches() {
+    this.httpClient.get<BranchResponse>(environment.apiUrl+"/masters/branch/")
+     .subscribe({
+               next : (data1) => {
+                 this.branches$.next(data1.data);
+               },
+               error: (error: HttpErrorResponse) => {
+                 console.log(error.name + ' ' + error.message);
+               },
+           });
+   }
+   
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Staff } from './staff.model';
+import { Staff,StaffResponse,User } from '../staff.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 @Injectable()
@@ -36,15 +36,15 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
   addStaff(staff: Staff): void {
     this.dialogData = staff;
 
-    // this.httpClient.post(this.API_URL, staff)
-    //   .subscribe({
-    //     next: (data) => {
-    //       this.dialogData = staff;
-    //     },
-    //     error: (error: HttpErrorResponse) => {
-    //        // error code here
-    //     },
-    //   });
+    this.httpClient.post(this.API_URL, staff)
+      .subscribe({
+        next: (data) => {
+          this.dialogData = staff;
+        },
+        error: (error: HttpErrorResponse) => {
+           // error code here
+        },
+      });
   }
   updateStaff(staff: Staff): void {
     this.dialogData = staff;

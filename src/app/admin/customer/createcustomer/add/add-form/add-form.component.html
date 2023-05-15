@@ -1,0 +1,1554 @@
+<div class="addContainer">
+    <div class="modalHeader">
+      <div class="editRowModal">
+        <div class="modalHeader clearfix">
+          <img [src]='customer.img' alt="avatar">
+          <div class="modal-about">
+            {{dialogTitle}}
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <form class="register-form m-4" [formGroup]="customerForm" (ngSubmit)="submit">
+        
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="fname" required>
+                <mat-error *ngIf="customerForm.get('fname')?.hasError('required')">
+                  First name is required
+                </mat-error>
+              </mat-form-field>
+              </div>
+            
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Sur Name</mat-label>
+                <input matInput formControlName="surname"  required>
+                <mat-error *ngIf="customerForm.get('surname')?.hasError('required')">
+               Sur name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender" required>
+                  <mat-option [value]="'male'">
+                    Male
+                  </mat-option>
+                  <mat-option [value]="'female'">
+                    Female
+                  </mat-option>
+                  <mat-option [value]="'other'">
+                    Other
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="customerForm.get('gender')?.hasError('required')">
+                  Gender is required
+                </mat-error>
+              </mat-form-field>
+              </div>
+            </div>
+               
+            
+            <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Mobile</mat-label>
+                <input matInput formControlName="mobile" type="number" required>
+              </mat-form-field>
+            </div>
+          
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+            </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+           <mat-label>Aadhar Number</mat-label>
+           <input matInput formControlName="aadhar"> 
+            </mat-form-field>
+            </div>
+            </div>
+            
+
+            <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Date Of Birth</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="customerForm.get('dob')?.hasError('required')">
+                    Please select date
+                  </mat-error>
+                </mat-form-field>
+              </div>
+             
+              <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Time Of Birth</mat-label>
+                  <input matInput [matTimepicker]="picker" formControlName=" tob" required>
+                  <mat-timepicker-toggle matSuffix [for]="picker"></mat-timepicker-toggle>
+                  <mat-timepicker #picker></mat-timepicker>
+                  <mat-error *ngIf="customerForm.get('tob')?.hasError('required')">
+                    Please select Time
+                  </mat-error>
+                </mat-form-field>
+              </div> -->
+
+
+              <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+               <mat-label>Time Of Birth</mat-label>
+              <mat-timepicker color="primary" label="Hour" appearance="standard" [userTime]="exportTime"></mat-timepicker>
+              </mat-form-field>
+               </div> -->
+               
+              
+               <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Birth Place</mat-label>
+                <input matInput formControlName="birth">
+              </mat-form-field>
+            </div>
+            </div>
+
+
+            <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Select Religion</mat-label>
+                <mat-select formControlName="religion" required>
+                  <mat-option [value]="'hindu'">
+                    Hindu
+                  </mat-option>
+                  <mat-option [value]="'muslim'">
+                    Muslim
+                  </mat-option>
+                  <mat-option [value]="'christian'">
+                    Christian
+                  </mat-option>
+                </mat-select>    
+              </mat-form-field>
+            </div>
+
+         
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Select Caste</mat-label>
+      <mat-select formControlName="caste" required>
+        <mat-option [value]="'kapu'">
+         Adi 
+        </mat-option>
+        <mat-option [value]="'reddy'">
+          Reddy
+        </mat-option>
+        <mat-option [value]="'kamma'">
+          Kamma
+        </mat-option>
+      </mat-select>  
+    </mat-form-field>
+  </div>
+  
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Are You Converted Your Caste</mat-label>
+      <mat-select formControlName="subcaste">
+        <mat-option [value]="'kapu'">
+         Yes 
+        </mat-option>
+        <mat-option [value]="'reddy'">
+         No
+        </mat-option>
+       
+      </mat-select>  
+    </mat-form-field>
+  </div>
+  </div>
+   
+  <div class="row">
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Star</mat-label>
+      <mat-select formControlName="star" required>
+        <mat-option [value]="'andhrapradesh'">
+          Aswini
+        </mat-option>
+        <mat-option [value]="'telangana'">
+          Bharani
+        </mat-option>
+        <mat-option [value]="'Kerala'">
+          Krithika
+        </mat-option>
+        <mat-option [value]="'karnataka'">
+          Arudra
+        </mat-option>
+        <mat-option [value]="'bengal'">
+          Rohini
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>MoonSign/Raasi</mat-label>
+      <mat-select formControlName="rasi" required>
+        <mat-option [value]="'andhrapradesh'">
+          Simha
+        </mat-option>
+        <mat-option [value]="'telangana'">
+          Kanya
+        </mat-option>
+        <mat-option [value]="'Kerala'">
+          Makara
+        </mat-option>
+        <mat-option [value]="'karnataka'">
+          Karkataka
+        </mat-option>
+        <mat-option [value]="'bengal'">
+          Vruchhika
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Paadam</mat-label>
+      <mat-select formControlName="paadam" required>
+        <mat-option [value]="'andhrapradesh'">
+          1
+        </mat-option>
+        <mat-option [value]="'telangana'">
+          2
+        </mat-option>
+        <mat-option [value]="'Kerala'">
+          3
+        </mat-option>
+        <mat-option [value]="'karnataka'">
+          4
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Gothram</mat-label>
+      <input matInput formControlName="gothram" required>
+    </mat-form-field>
+  </div>
+
+
+   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Khuja Dosham</mat-label>
+      <mat-select formControlName="dosham" required>
+        <mat-option [value]="'yes'">
+          Yes
+        </mat-option>
+        <mat-option [value]="'female'">
+          No
+        </mat-option>
+        <mat-option [value]="'other'">
+          Don't Know
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Height</mat-label>
+  <mat-select formControlName="height" required>
+    <mat-option [value]="'feet1'">
+      4feet
+    </mat-option>
+    <mat-option [value]="'feet1'">
+      5feet
+    </mat-option>
+    <mat-option [value]="'feet1'">
+      6feet
+    </mat-option>
+    <mat-option [value]="'feet1'">
+      7feet
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+</div>
+
+
+<div class="row">  
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Blood Group</mat-label>
+<mat-select formControlName="blood" required>
+  <mat-option [value]="'feet1'">
+    A+
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    A-
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    AB+
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    AB-
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    O+
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    O-
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    B+
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    B-
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+  
+ <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>mother Tongue</mat-label>
+<mat-select formControlName="tongue" required>
+  <mat-option [value]="'feet1'">
+   Telugu
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    Tamil
+  </mat-option>
+  <mat-option [value]="'feet1'">
+   Malayala
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    Kerala
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Health Condition</mat-label>
+<mat-select formControlName="health" required>
+  <mat-option [value]="'feet1'">
+   Good
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    Better
+  </mat-option>
+  <mat-option [value]="'feet1'">
+   Healthy
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    Physically Challenged
+  </mat-option>
+   <mat-option [value]="'feet1'">
+   Mentally Challenged
+  </mat-option>
+  <mat-option [value]="'feet1'">
+    Average
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+</div>
+
+<div class="row">  
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Complexion</mat-label>
+<mat-select formControlName="complex" required>
+  <mat-option [value]="'male'">
+    Very Fair
+  </mat-option>
+  <mat-option [value]="'female'">
+    Fair
+  </mat-option>
+  <mat-option [value]="'other'">
+    medium
+  </mat-option>
+  <mat-option [value]="'other'">
+    Dark
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+
+ <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Marital Status</mat-label>
+<mat-select formControlName="marital" required>
+  <mat-option [value]="'male'">
+    Unmarried 
+  </mat-option>
+  <mat-option [value]="'female'">
+    Widower 
+  </mat-option>
+  <mat-option [value]="'other'">
+    Divorced
+  </mat-option>
+  <mat-option [value]="'other'">
+     Waiting for Divorce 
+  </mat-option>
+   <mat-option [value]="'other'">
+     No Divorce
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Smoke</mat-label>
+<mat-select formControlName="smoke" required>
+  <mat-option [value]="'male'">
+    No 
+  </mat-option>
+  <mat-option [value]="'female'">
+    Occasional
+  </mat-option>
+  <mat-option [value]="'other'">
+    Regular
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+</div>
+
+<div class="row">  
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Drink</mat-label>
+<mat-select formControlName="drink" required>
+  <mat-option [value]="'male'">
+    No 
+  </mat-option>
+  <mat-option [value]="'female'">
+    Occasional
+  </mat-option>
+  <mat-option [value]="'other'">
+    Regular
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Food</mat-label>
+<mat-select formControlName="food" required>
+  <mat-option [value]="'male'">
+    Vegetarion 
+  </mat-option>
+  <mat-option [value]="'female'">
+     Non-Vegetarion
+  </mat-option>
+  <mat-option [value]="'other'">
+     Eggetarian
+  </mat-option>
+  <mat-option [value]="'other'">
+      Not-Particular 
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>About Me</mat-label>
+<textarea matInput formControlName="address"></textarea>
+</mat-form-field>
+</div>
+</div>
+
+<div class="row"> 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Hobbies</mat-label>
+ <mat-select formControlName="hobbies" required>
+ <mat-checkbox>Playing Cricket</mat-checkbox>
+ <mat-checkbox>Playing Chess</mat-checkbox>
+ <mat-checkbox>Playing Caroms </mat-checkbox>
+ <mat-checkbox>Playing Kabadi </mat-checkbox>
+ <mat-checkbox>Reading Books</mat-checkbox>
+  <mat-checkbox>Reading News</mat-checkbox>
+  <mat-checkbox>Sketching</mat-checkbox>
+  <mat-checkbox>Singing </mat-checkbox>
+  <mat-checkbox>Dancing</mat-checkbox>
+  <mat-checkbox>Cooking</mat-checkbox>
+  <mat-checkbox>Collecting Coins</mat-checkbox>
+  <mat-checkbox>Collecting Artwork</mat-checkbox>
+  <mat-checkbox>Drawing</mat-checkbox>
+  <mat-checkbox>Painting</mat-checkbox>
+  <mat-checkbox>Pets</mat-checkbox>
+  <mat-checkbox>Gardening/ landscaping </mat-checkbox>
+  <mat-checkbox>Puzzles</mat-checkbox>
+  <mat-checkbox> Art / handicraft</mat-checkbox>
+  <mat-checkbox>playing games </mat-checkbox>
+  <mat-checkbox>Volley ball player</mat-checkbox>
+</mat-select>
+</mat-form-field>
+</div>
+
+ 
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Interests</mat-label>
+ <mat-select formControlName="interest" required>
+ <mat-checkbox>Learning new languages</mat-checkbox>
+ <mat-checkbox>Sports</mat-checkbox>
+ <mat-checkbox>Movies </mat-checkbox>
+ <mat-checkbox>Music </mat-checkbox>
+ <mat-checkbox>Social service</mat-checkbox>
+  <mat-checkbox>Internet </mat-checkbox>
+  <mat-checkbox> Travel </mat-checkbox>
+  <mat-checkbox> Reading </mat-checkbox>
+  <mat-checkbox>watching tv </mat-checkbox>
+  <mat-checkbox>listening to music</mat-checkbox>
+  <mat-checkbox>Passion of changing mobiles </mat-checkbox>
+  <mat-checkbox>Exploring New Things  </mat-checkbox>
+  <mat-checkbox> POEMS </mat-checkbox>
+  <mat-checkbox>vexing games </mat-checkbox>
+  <mat-checkbox> meditation </mat-checkbox>
+  <mat-checkbox>Swimming </mat-checkbox>
+</mat-select>
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Favourite Music</mat-label>
+ <mat-select formControlName="music" required>
+ <mat-checkbox>Film songs</mat-checkbox>
+ <mat-checkbox>Western</mat-checkbox>
+ <mat-checkbox>classical </mat-checkbox>
+</mat-select>
+</mat-form-field>
+</div>
+</div>
+
+<div class="row"> 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Sports/Fitness Activities</mat-label>
+   <mat-select formControlName="sports" required>
+   <mat-checkbox>Badminton</mat-checkbox>
+   <mat-checkbox> Volleyball </mat-checkbox>
+   <mat-checkbox> Chess </mat-checkbox>
+    <mat-checkbox>  cricket </mat-checkbox>
+    <mat-checkbox>kabadi</mat-checkbox>
+    <mat-checkbox> fighting </mat-checkbox>
+    <mat-checkbox>Photo Design </mat-checkbox>
+  </mat-select>
+</mat-form-field>
+</div>
+   
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Favourite Cuisine</mat-label>
+   <mat-select formControlName="cuisine" required>
+   <mat-checkbox>South Indian </mat-checkbox>
+  </mat-select>
+</mat-form-field>
+</div>
+
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Favourite Reads </mat-label>
+   <mat-select formControlName="reads" required>
+   <mat-checkbox>Comics</mat-checkbox>
+    <mat-checkbox> Fantasy </mat-checkbox>
+   <mat-checkbox>  Thriller/suspense  </mat-checkbox>
+   <mat-checkbox> Biographies </mat-checkbox>
+    <mat-checkbox>   History  </mat-checkbox>
+    <mat-checkbox>Self-help</mat-checkbox>
+    <mat-checkbox>writing lyrics  </mat-checkbox>
+    <mat-checkbox>Doing Religious Activities </mat-checkbox>
+   <mat-checkbox> Preparation for groups </mat-checkbox>
+   <mat-checkbox> photgraphy </mat-checkbox>
+    <mat-checkbox>  nature lover  </mat-checkbox>
+  </mat-select>
+</mat-form-field>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Preferred Movies </mat-label>
+   <mat-select formControlName="movies" required>
+   <mat-checkbox>Action/suspense</mat-checkbox>
+   <mat-checkbox>   Comedy  / suspense  </mat-checkbox>
+   <mat-checkbox> Sci-Fi & fantasy  </mat-checkbox>
+    <mat-checkbox>   think different   </mat-checkbox>
+    <mat-checkbox> Passions</mat-checkbox>
+    <mat-checkbox>Visiting new places  </mat-checkbox>
+    <mat-checkbox>respects to parents</mat-checkbox>
+  </mat-select>
+</mat-form-field>
+</div>
+
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Preferred Dress Style</mat-label>
+   <mat-select formControlName="style" required>
+   <mat-checkbox>Casual wear</mat-checkbox>
+   <mat-checkbox>  Designer wear  </mat-checkbox>
+   <mat-checkbox> Indian /Ethnic wear</mat-checkbox>
+  </mat-select>
+</mat-form-field>
+</div>
+
+
+ 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Spoken Languages  </mat-label>
+   <mat-select formControlName="spoken" required>
+   <mat-checkbox>English </mat-checkbox>
+   <mat-checkbox>  Telugu / suspense  </mat-checkbox>
+   <mat-checkbox> Hindi </mat-checkbox>
+    <mat-checkbox>   Kannada  </mat-checkbox>
+    <mat-checkbox>Tamil</mat-checkbox>
+  </mat-select>
+</mat-form-field>
+</div> 
+</div>
+      
+<div class="row">
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Country</mat-label>
+    <mat-select formControlName="country" required>
+      <mat-option [value]="'andhrapradesh'">
+        India
+      </mat-option>
+      <mat-option [value]="'telangana'">
+        USA
+      </mat-option>
+      <mat-option [value]="'Kerala'">
+        Australia
+      </mat-option>
+      <mat-option [value]="'karnataka'">
+        UK
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Srilanka
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>State</mat-label>
+    <mat-select formControlName="state" required>
+      <mat-option [value]="'andhrapradesh'">
+        Andhrapradesh
+      </mat-option>
+      <mat-option [value]="'telangana'">
+        Telangana
+      </mat-option>
+      <mat-option [value]="'Kerala'">
+        kerala
+      </mat-option>
+      <mat-option [value]="'karnataka'">
+        Karnataka
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Bengal
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>District</mat-label>
+    <mat-select formControlName="district" required>
+      <mat-option [value]="'andhrapradesh'">
+        Vizianagaram
+      </mat-option>
+      <mat-option [value]="'telangana'">
+        Visakhapatnam
+      </mat-option>
+      <mat-option [value]="'Kerala'">
+        Srikakulam
+      </mat-option>
+      <mat-option [value]="'karnataka'">
+        Krishna
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Nellore
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+</div>
+
+<div class="row"> 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>City</mat-label>
+  <mat-select formControlName="city" required>
+    <mat-option [value]="'andhrapradesh'">
+      Andhrapradesh
+    </mat-option>
+    <mat-option [value]="'telangana'">
+      Telangana
+    </mat-option>
+    <mat-option [value]="'Kerala'">
+      kerala
+    </mat-option>
+    <mat-option [value]="'karnataka'">
+      Karnataka
+    </mat-option>
+    <mat-option [value]="'bengal'">
+      Bengal
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+
+   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Address</mat-label>
+     <textarea matInput formControlName="altaddress"></textarea>
+         </mat-form-field>
+            </div>
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Alternative Mobile Number</mat-label>
+      <input matInput formControlName="altmobile" type="number">
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="row"> 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Alternative Email</mat-label>
+    <input matInput formControlName="altemail" required>
+  </mat-form-field>
+ </div>
+       
+
+<!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+ <mat-form-field class="example-full-width mb-3" appearance="outline">
+ <mat-label>Time to call</mat-label>
+ <material-timepicker color="primary" label="Hour" appearance="standard" [userTime]="exportTime"></material-timepicker>
+   </mat-form-field>
+  </div> -->
+
+ 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Application For</mat-label>
+    <mat-select formControlName="appl" required>
+      <mat-option [value]="'andhrapradesh'">
+        Myself
+      </mat-option>
+      <mat-option [value]="'telangana'">
+        Son
+      </mat-option>
+      <mat-option [value]="'Kerala'">
+        Daughter
+      </mat-option>
+      <mat-option [value]="'karnataka'">
+        Brother
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Sister
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Relative
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+ </div>
+ </div>
+
+ <div class="row"> 
+ <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Source</mat-label>
+    <mat-select formControlName="source" required>
+      <mat-option [value]="'andhrapradesh'">
+        Friend
+      </mat-option>
+      <mat-option [value]="'telangana'">
+        News Paper
+      </mat-option>
+      <mat-option [value]="'Kerala'">
+        Tv Channel
+      </mat-option>
+      <mat-option [value]="'karnataka'">
+        Website
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Self
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+  <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Nearest Branch</mat-label>
+    <mat-select formControlName="near" required>
+      <mat-option [value]="'andhrapradesh'">
+        Vizag
+      </mat-option>
+      <mat-option [value]="'telangana'">
+        Ongole
+      </mat-option>
+      <mat-option [value]="'Kerala'">
+        Tirupathi
+      </mat-option>
+      <mat-option [value]="'karnataka'">
+        Nellore
+      </mat-option>
+      <mat-option [value]="'bengal'">
+        Vijayawada
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+</div>
+ 
+        
+
+      <div class="header">
+        <h2>Education Details</h2>
+      </div>
+          
+            <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Education</mat-label>
+                <mat-select formControlName="education" required>
+                  <mat-option [value]="'hindu'">
+                    B.Tech
+                  </mat-option>
+                  <mat-option [value]="'muslim'">
+                    M.Tech
+                  </mat-option>
+                  <mat-option [value]="'christian'">
+                    Ph.d
+                  </mat-option>
+                </mat-select>    
+              </mat-form-field>
+            </div>
+
+         
+       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>University</mat-label>
+      <mat-select formControlName="universe" required>
+        <mat-option [value]="'kapu'">
+         JNTU
+        </mat-option>
+        <mat-option [value]="'reddy'">
+          AU
+        </mat-option>
+        <mat-option [value]="'kamma'">
+          SVU
+        </mat-option>
+      </mat-select>  
+    </mat-form-field>
+  </div>
+
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Employed in</mat-label>
+      <mat-select formControlName="emply" required>
+        <mat-option [value]="'andhrapradesh'">
+          Govt
+        </mat-option>
+        <mat-option [value]="'telangana'">
+          Private
+        </mat-option>
+        <mat-option [value]="'Kerala'">
+          Krithika
+        </mat-option>
+        <mat-option [value]="'karnataka'">
+          Arudra
+        </mat-option>
+        <mat-option [value]="'bengal'">
+          Rohini
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  </div>
+
+    
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Designation</mat-label>
+        <mat-select formControlName="design" required>
+          <mat-option [value]="'hindu'">
+            B.Tech
+          </mat-option>
+          <mat-option [value]="'muslim'">
+            M.Tech
+          </mat-option>
+          <mat-option [value]="'christian'">
+            Ph.d
+          </mat-option>
+        </mat-select>    
+      </mat-form-field>
+    </div>
+
+ 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Profession</mat-label>
+<mat-select formControlName="Profession" required>
+<mat-option [value]="'kapu'">
+ JNTU
+</mat-option>
+<mat-option [value]="'reddy'">
+  AU
+</mat-option>
+<mat-option [value]="'kamma'">
+  SVU
+</mat-option>
+</mat-select>  
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Working Location</mat-label>
+<mat-select formControlName="work" required>
+  <mat-option [value]="'abroad'">
+    Abroad
+  </mat-option>
+  <mat-option [value]="'india'">
+    India
+  </mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Property Details</mat-label>
+  <input matInput formControlName="property" required>
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Annual Income</mat-label>
+  <input matInput formControlName="annual"  required>
+</mat-form-field>
+</div>
+</div>
+
+
+      
+    
+
+
+
+      <div class="header">
+        <h2>Provide Your Family Details</h2>
+      </div>
+
+            <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Family Status</mat-label>
+                <mat-select formControlName="fstatus" required>
+                  <mat-option [value]="'hindu'">
+                    Very Rich
+                  </mat-option>
+                  <mat-option [value]="'muslim'">
+                    Rich
+                  </mat-option>
+                  <mat-option [value]="'christian'">
+                    Medium
+                  </mat-option>
+                  <mat-option [value]="'christian'">
+                    poor
+                  </mat-option>
+                </mat-select>    
+              </mat-form-field>
+            </div>
+
+         
+       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">     
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Family Type</mat-label>
+      <mat-select formControlName="ftype" required>
+        <mat-option [value]="'kapu'">
+         Joint Family
+        </mat-option>
+        <mat-option [value]="'reddy'">
+          Nuclear Family
+        </mat-option>
+        <mat-option [value]="'kamma'">
+          Others
+        </mat-option>
+      </mat-select>  
+    </mat-form-field>
+  </div>
+  </div>
+
+
+
+  <div class="header">
+    <h2>Father Details</h2>
+  </div>
+  
+<div class="row">
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Father Name</mat-label>
+      <input matInput formControlName="fathername" required>
+      <mat-error *ngIf="customerForm.get('fathername')?.hasError('required')">
+        First name is required
+      </mat-error>
+    </mat-form-field>
+    </div>
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Select Religion</mat-label>
+      <mat-select formControlName="freligion" required>
+        <mat-option [value]="'hindu'">
+          B.Tech
+        </mat-option>
+        <mat-option [value]="'muslim'">
+          M.Tech
+        </mat-option>
+        <mat-option [value]="'christian'">
+          Ph.d
+        </mat-option>
+      </mat-select>    
+    </mat-form-field>
+  </div>
+
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Select Caste</mat-label>
+<mat-select formControlName="fcaste" required>
+<mat-option [value]="'kapu'">
+JNTU
+</mat-option>
+<mat-option [value]="'reddy'">
+AU
+</mat-option>
+<mat-option [value]="'kamma'">
+SVU
+</mat-option>
+</mat-select>  
+</mat-form-field>
+</div>
+</div>
+
+
+<div class="row"> 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Is Converted Caste</mat-label>
+<mat-select formControlName=" isconvert">
+  <mat-option [value]="'hindu'">
+    YES
+  </mat-option>
+  <mat-option [value]="'muslim'">
+    NO
+  </mat-option>
+</mat-select>    
+</mat-form-field>
+</div>
+
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+ <mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Father Status</mat-label>
+<mat-select formControlName="fatherstatus" required>
+<mat-option [value]="'kapu'">
+Late
+</mat-option>
+<mat-option [value]="'reddy'">
+Alive
+</mat-option>
+</mat-select>  
+</mat-form-field>
+</div>
+
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Pension</mat-label>
+<input matInput formControlName="pension">
+</mat-form-field>
+</div>
+</div>
+
+<!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Family's Permanent Address</mat-label>
+<textarea matInput formControlName="address"></textarea>
+</mat-form-field>
+</div> -->
+
+
+  
+    <div class="header">
+      <h2>Mother Details</h2>
+    </div>
+    
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Mother Name</mat-label>
+        <input matInput formControlName="mname" required>
+        <mat-error *ngIf="customerForm.get('mname')?.hasError('required')">
+          First name is required
+        </mat-error>
+      </mat-form-field>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
+          <mat-label>Mother's Maiden Name</mat-label>
+          <input matInput formControlName="maidenname" required>
+        </mat-form-field>
+        </div>
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Select Religion</mat-label>
+        <mat-select formControlName="mreligion" required>
+          <mat-option [value]="'hindu'">
+            B.Tech
+          </mat-option>
+          <mat-option [value]="'muslim'">
+            M.Tech
+          </mat-option>
+          <mat-option [value]="'christian'">
+            Ph.d
+          </mat-option>
+        </mat-select>    
+      </mat-form-field>
+    </div>
+    </div>
+
+ 
+<div class="row">    
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Select Caste</mat-label>
+<mat-select formControlName="mcaste" required>
+<mat-option [value]="'kapu'">
+ JNTU
+</mat-option>
+<mat-option [value]="'reddy'">
+  AU
+</mat-option>
+<mat-option [value]="'kamma'">
+  SVU
+</mat-option>
+</mat-select>  
+</mat-form-field>
+</div>
+
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Is Converted Caste</mat-label>
+  <mat-select formControlName="mconvert">
+    <mat-option [value]="'hindu'">
+      YES
+    </mat-option>
+    <mat-option [value]="'muslim'">
+      NO
+    </mat-option>
+  </mat-select>    
+</mat-form-field>
+</div>
+
+
+ <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+   <mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Mother Status</mat-label>
+  <mat-select formControlName="motherstat" required>
+  <mat-option [value]="'kapu'">
+  Late
+ </mat-option>
+ <mat-option [value]="'reddy'">
+  Alive
+ </mat-option>
+ </mat-select>  
+ </mat-form-field>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Family's Permanent Address</mat-label>
+<textarea matInput formControlName="peraddress"></textarea>
+</mat-form-field>
+</div>
+      
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+    <mat-label>Family's Present Address</mat-label>
+    <textarea matInput formControlName="presentaddress"></textarea>
+    </mat-form-field>
+    </div>
+    
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Number Of Brothers</mat-label>
+        <input matInput formControlName="brothers">
+      </mat-form-field>
+      </div>
+     </div>
+   
+     <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
+          <mat-label>Number Of Sisters</mat-label>
+          <input matInput formControlName="sisters">
+        </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="header">
+        <h2>Reference Details</h2>
+      </div>
+      
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
+          <mat-label>Reference Name</mat-label>
+          <input matInput formControlName="refname ">
+        </mat-form-field>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Reference Mobile</mat-label>
+            <input matInput formControlName="refmobile" type="number" >
+          </mat-form-field>
+        </div>
+         
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Reference Address</mat-label>
+            <textarea matInput formControlName="refaddress"></textarea>
+            </mat-form-field>
+            </div>
+           </div>
+            
+       
+
+
+      <div class="header">
+        <h2>Partner Details</h2>
+      </div>
+      
+            <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Looking For</mat-label>
+                <mat-select formControlName="plooking" required>
+                  <mat-option [value]="'hindu'">
+                    Very Rich
+                  </mat-option>
+                  <mat-option [value]="'muslim'">
+                    Rich
+                  </mat-option>
+                  <mat-option [value]="'christian'">
+                    Medium
+                  </mat-option>
+                  <mat-option [value]="'christian'">
+                    poor
+                  </mat-option>
+                </mat-select>    
+              </mat-form-field>
+            </div>
+  
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Age</mat-label>
+                <mat-select formControlName="age" required>
+                  <mat-option [value]="'feet1'">
+                    21
+                  </mat-option>
+                  <mat-option [value]="'feet1'">
+                    22
+                  </mat-option>
+                  <mat-option [value]="'feet1'">
+                    30
+                  </mat-option>
+                  <mat-option [value]="'feet1'">
+                    31
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Height</mat-label>
+                <mat-select formControlName="pheight" required>
+                  <mat-option [value]="'feet1'">
+                    4feet
+                  </mat-option>
+                  <mat-option [value]="'feet1'">
+                    5feet
+                  </mat-option>
+                  <mat-option [value]="'feet1'">
+                    6feet
+                  </mat-option>
+                  <mat-option [value]="'feet1'">
+                    7feet
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Family Status</mat-label>
+              <mat-select formControlName="pfstatus" required>
+                <mat-option [value]="'hindu'">
+                  Very Rich
+                </mat-option>
+                <mat-option [value]="'muslim'">
+                  Rich
+                </mat-option>
+                <mat-option [value]="'christian'">
+                  Medium
+                </mat-option>
+                <mat-option [value]="'christian'">
+                  poor
+                </mat-option>
+              </mat-select>    
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Ready for Inter-caste Marriage</mat-label>
+              <mat-select formControlName="pintercaste">
+                <mat-option [value]="'hindu'">
+                  YES
+                </mat-option>
+                <mat-option [value]="'muslim'">
+                  NO
+                </mat-option>
+              </mat-select>    
+            </mat-form-field>
+          </div>
+       
+          
+   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Khuja Dosham</mat-label>
+      <mat-select formControlName="khujadosham" required>
+        <mat-option [value]="'yes'">
+          Yes
+        </mat-option>
+        <mat-option [value]="'female'">
+          No
+        </mat-option>
+        <mat-option [value]="'other'">
+          Any
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div> 
+
+
+<div class="row">  
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Complexion</mat-label>
+      <mat-select formControlName="complexion" required>
+        <mat-option [value]="'male'">
+          Very Fair
+        </mat-option>
+        <mat-option [value]="'female'">
+          Fair
+        </mat-option>
+        <mat-option [value]="'other'">
+          medium
+        </mat-option>
+        <mat-option [value]="'other'">
+          Dark
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Smoke</mat-label>
+      <mat-select formControlName="psmoke" required>
+        <mat-option [value]="'male'">
+          No 
+        </mat-option>
+        <mat-option [value]="'female'">
+          Occasional
+        </mat-option>
+        <mat-option [value]="'other'">
+          Regular
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+   
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+    <mat-form-field class="example-full-width mb-3" appearance="outline">
+      <mat-label>Drink</mat-label>
+      <mat-select formControlName="pdrink" required>
+        <mat-option [value]="'male'">
+          No 
+        </mat-option>
+        <mat-option [value]="'female'">
+          Occasional
+        </mat-option>
+        <mat-option [value]="'other'">
+          Regular
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  </div>
+  
+
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width mb-3" appearance="outline">
+        <mat-label>Education</mat-label>
+        <mat-select formControlName="peducation" required>
+          <mat-option [value]="'hindu'">
+            B.Tech
+          </mat-option>
+          <mat-option [value]="'muslim'">
+            M.Tech
+          </mat-option>
+          <mat-option [value]="'christian'">
+            Ph.d
+          </mat-option>
+        </mat-select>    
+      </mat-form-field>
+    </div>
+
+ 
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">     
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+<mat-label>Profession</mat-label>
+<mat-select formControlName="pprofession" required>
+<mat-option [value]="'kapu'">
+ JNTU
+</mat-option>
+<mat-option [value]="'reddy'">
+  AU
+</mat-option>
+<mat-option [value]="'kamma'">
+  SVU
+</mat-option>
+</mat-select>  
+</mat-form-field>
+</div>
+     
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+<mat-form-field class="example-full-width mb-3" appearance="outline">
+  <mat-label>Passport</mat-label>
+  <mat-select formControlName="passport" required>
+    <mat-option [value]="'yes'">
+      Yes
+    </mat-option>
+    <mat-option [value]="'female'">
+      No
+    </mat-option>
+    <mat-option [value]="'other'">
+      Any
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+</div> 
+
+<div class="header">
+    <h2>Upload Profile Picture</h2>
+         </div>
+<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+ <label>Upload Picture</label>
+ <app-file-upload formControlName="uploadFile"></app-file-upload>
+</div>
+
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [disabled]="!customerForm.valid" [mat-dialog-close]="1"
+                (click)="confirmAdd()">Save</button>
+              <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  

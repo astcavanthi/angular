@@ -71,11 +71,11 @@ export class MainComponent implements OnInit {
     this.areaChartOptions = {
       series: [
         {
-          name: 'new students',
+          name: 'Registered Users',
           data: [31, 40, 28, 51, 42, 85, 77],
         },
         {
-          name: 'old students',
+          name: 'Membership Users',
           data: [11, 32, 45, 32, 34, 52, 41],
         },
       ],
@@ -132,7 +132,7 @@ export class MainComponent implements OnInit {
       series: [
         {
           name: 'percent',
-          data: [5, 8, 10, 14, 9, 7, 11, 5, 9, 16, 7, 5],
+          data: [5, 8, 10, 14],
         },
       ],
       chart: {
@@ -168,18 +168,10 @@ export class MainComponent implements OnInit {
       },
       xaxis: {
         categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
+          '18-25',
+          '25-35',
+          '35-40',
+          '40-50',
         ],
         position: 'bottom',
         labels: {
@@ -301,7 +293,7 @@ export class MainComponent implements OnInit {
   }
   public chart4() {
     this.polarChartOptions = {
-      series2: [44, 55, 13, 43],
+      series2: [44, 55, 13],
       chart: {
         type: 'pie',
         height: 400,
@@ -313,8 +305,8 @@ export class MainComponent implements OnInit {
       dataLabels: {
         enabled: false,
       },
-      labels: ['Science', 'Mathes', 'Economics', 'History'],
-      colors: ['#6777ef', '#ff9800', '#B71180', '#2C495B'],
+      labels: ['First Marriage', 'Second Marriage', 'Widow Marriage'],
+      colors: ['#6777ef', '#ff9800', '#B71180'],
       responsive: [
         {
           breakpoint: 480,

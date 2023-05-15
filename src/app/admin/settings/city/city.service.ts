@@ -12,6 +12,7 @@ export class CityService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<City[]> = new BehaviorSubject<City[]>(
     []
   );
+  public cities$: BehaviorSubject<City[]> = new BehaviorSubject<City[]>([]);
   // Temporarily stores data from dialogs
   dialogData!: City;
   constructor(private httpClient: HttpClient) {
@@ -84,5 +85,18 @@ export class CityService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+
+  public onCountryStateDistrictChangeCity(e:any){
+    this.httpClient.get<CityResponse>(environment.apiUrl+"/masters/citydistrictstatecountries/" + e.value)
+    .subscribe({
+              next : (data1) => {
+                this.cities$.next(data1.data);
+              },
+              error: (error: HttpErrorResponse) => {
+                console.log(error.name + ' ' + error.message);
+              },
+          });
+   }
+
 
 }

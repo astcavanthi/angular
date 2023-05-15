@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { StaffService } from './staff.service';
+import { StaffService } from '../staff.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Staff } from './staff.model';
+import { Staff,StaffResponse,User } from '../staff.model';
 import { DataSource } from '@angular/cdk/collections';
 import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
 import { DeleteDialogComponent } from './dialog/delete/delete.component';
@@ -36,11 +36,13 @@ export class AllstaffComponent
     'select',
     'img',
     'name',
-    'designation',
+    'surname',
+    'gender',
+    // 'designation',
     'mobile',
     'email',
     'date',
-    'address',
+    'username',
     'actions',
   ];
   exampleDatabase?: StaffService;
@@ -234,12 +236,14 @@ export class AllstaffComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        Name: x.name,
-        Designation: x.designation,
-        Mobile: x.mobile,
-        Email: x.email,
-        'Joining Date': formatDate(new Date(x.date), 'yyyy-MM-dd', 'en') || '',
-        Address: x.address,
+        // Name: x.name,
+        // Surname: x.surname,
+        // Gender: x.gender,
+        // Designation: x.designation,
+        // Mobile: x.mobile,
+        // Email: x.email,
+        // 'Joining Date': formatDate(new Date(x.date), 'yyyy-MM-dd', 'en') || '',
+        // Address: x.address,
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -298,7 +302,7 @@ export class ExampleDataSource extends DataSource<Staff> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getAllStaffs();
+    this.exampleDatabase.getStaff();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
@@ -306,12 +310,14 @@ export class ExampleDataSource extends DataSource<Staff> {
           .slice()
           .filter((staff: Staff) => {
             const searchStr = (
-              staff.name +
-              staff.designation +
-              staff.email +
-              staff.mobile +
-              staff.date +
-              staff.address
+              staff.user.first_name +
+              staff.user.last_name +
+              staff.gender +
+              staff.user.state +
+              staff.user.email +
+              staff.user.phone +
+              staff.dob +
+              staff.user.address
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -342,21 +348,27 @@ export class ExampleDataSource extends DataSource<Staff> {
         case 'id':
           [propertyA, propertyB] = [a.id, b.id];
           break;
-        case 'name':
-          [propertyA, propertyB] = [a.name, b.name];
-          break;
-        case 'email':
-          [propertyA, propertyB] = [a.email, b.email];
-          break;
-        case 'date':
-          [propertyA, propertyB] = [a.date, b.date];
-          break;
-        case 'address':
-          [propertyA, propertyB] = [a.address, b.address];
-          break;
-        case 'mobile':
-          [propertyA, propertyB] = [a.mobile, b.mobile];
-          break;
+        // case 'name':
+        //   [propertyA, propertyB] = [a.name, b.name];
+        //   break;
+        //   case 'surname':
+        //     [propertyA, propertyB] = [a.surname, b.surname];
+        //     break;
+        //  case 'email':
+        //   [propertyA, propertyB] = [a.email, b.email];
+        //   break;
+          case 'gender':
+            [propertyA, propertyB] = [a.gender, b.gender];
+            break;
+        // case 'date':
+        //   [propertyA, propertyB] = [a.date, b.date];
+        //   break;
+        // case 'address':
+        //   [propertyA, propertyB] = [a.address, b.address];
+        //   break;
+        // case 'mobile':
+        //   [propertyA, propertyB] = [a.mobile, b.mobile];
+        //   break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;

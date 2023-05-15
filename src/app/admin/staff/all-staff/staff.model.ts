@@ -3,6 +3,8 @@ export class Staff {
   id: number;
   img: string;
   name: string;
+  surname: string;
+  gender: string;
   email: string;
   date: string;
   address: string;
@@ -13,11 +15,14 @@ export class Staff {
       this.id = staff.id || this.getRandomID();
       this.img = staff.img || 'assets/images/user/user1.jpg';
       this.name = staff.name || '';
+      this.surname = staff.surname || '';
+      this.gender = staff.gender || '';
       this.designation = staff.designation || '';
       this.email = staff.email || '';
       this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
       this.address = staff.address || '';
       this.mobile = staff.mobile || '';
+
     }
   }
   public getRandomID(): number {

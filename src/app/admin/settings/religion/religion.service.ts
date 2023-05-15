@@ -11,6 +11,7 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<Religion[]> = new BehaviorSubject<Religion[]>(
     []
   );
+  public religions$: BehaviorSubject<Religion[]> = new BehaviorSubject<Religion[]>([]);
   // Temporarily stores data from dialogs
   dialogData!: Religion;
   constructor(private httpClient: HttpClient) {
@@ -88,5 +89,16 @@ export class ReligionService extends UnsubscribeOnDestroyAdapter {
       });
   }
 
+  getReligions() {
+    this.httpClient.get<ReligionResponse>(environment.apiUrl+"/masters/religion/")
+     .subscribe({
+               next : (data1) => {
+                 this.religions$.next(data1.data);
+               },
+               error: (error: HttpErrorResponse) => {
+                 console.log(error.name + ' ' + error.message);
+               },
+           });
+   }
 
 }

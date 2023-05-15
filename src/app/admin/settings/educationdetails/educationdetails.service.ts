@@ -11,6 +11,7 @@ export class EducationdetailsService extends UnsubscribeOnDestroyAdapter {
   dataChange: BehaviorSubject<Educationdetails[]> = new BehaviorSubject<Educationdetails[]>(
     []
   );
+  public educations$: BehaviorSubject<Educationdetails[]> = new BehaviorSubject<Educationdetails[]>([]);
   // Temporarily stores data from dialogs
   dialogData!: Educationdetails;
   constructor(private httpClient: HttpClient) {
@@ -85,5 +86,17 @@ export class EducationdetailsService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+
+  getEducations() {
+    this.httpClient.get<EducationdetailsResponse>(environment.apiUrl+"/masters/education/")
+     .subscribe({
+               next : (data1) => {
+                 this.educations$.next(data1.data);
+               },
+               error: (error: HttpErrorResponse) => {
+                 console.log(error.name + ' ' + error.message);
+               },
+           });
+   }
 
 }

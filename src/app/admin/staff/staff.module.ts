@@ -25,7 +25,7 @@ import { DeleteDialogComponent } from './all-staff/dialog/delete/delete.componen
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { EditStaffComponent } from './edit-staff/edit-staff.component';
 import { AboutStaffComponent } from './about-staff/about-staff.component';
-import { StaffService } from './all-staff/staff.service';
+import { StaffService } from './staff.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';

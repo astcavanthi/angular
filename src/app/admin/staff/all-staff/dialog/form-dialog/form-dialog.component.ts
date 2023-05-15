@@ -60,6 +60,8 @@ export class FormDialogComponent {
       id: [this.staff.id],
       img: [this.staff.img],
       name: [this.staff.name],
+      surname: [this.staff.surname],
+      gender: [this.staff.gender],
       email: [
         this.staff.email,
         [Validators.required, Validators.email, Validators.minLength(5)],
@@ -68,9 +70,6 @@ export class FormDialogComponent {
         formatDate(this.staff.date, 'yyyy-MM-dd', 'en'),
         [Validators.required],
       ],
-      designation: [this.staff.designation],
-      address: [this.staff.address],
-      mobile: [this.staff.mobile],
     });
   }
   submit() {

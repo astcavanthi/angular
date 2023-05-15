@@ -95,6 +95,24 @@
         "ABOUT-STAFF": "About Staff"
       }
     },
+    "CUSTOMER": {
+      "TEXT": "Customer",
+      "LIST": {
+        "ALL-CUSTOMERS": "All Customers",
+        "ADD-CUSTOMER": "Add Customer",
+        "EDIT-CUSTOMER": "Edit Customer",
+        "ABOUT-CUSTOMER": "About Customer"
+      }
+    },
+    "AGENT": {
+      "TEXT": "Agent",
+      "LIST": {
+        "ALL-AGENTS": "All Agents",
+        "ADD-AGENT": "Add Agent",
+        "EDIT-AGENT": "Edit Agent",
+        "ABOUT-AGENT": "About Agent"
+      }
+    },
     "HOLIDAY": {
       "TEXT": "Holiday",
       "LIST": {

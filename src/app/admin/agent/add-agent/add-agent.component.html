@@ -1,0 +1,226 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+              <h2> Agent Information</h2>
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="agentForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Name</mat-label>
+                      <input matInput formControlName="name" required>
+                      <mat-error *ngIf="agentForm.get('name')?.hasError('required')">
+                        Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Surname</mat-label>
+                      <input matInput formControlName="surname">
+                    </mat-form-field>
+                  </div>
+                
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Mobile</mat-label>
+                      <input matInput formControlName="mobile" type="number" required>
+                    </mat-form-field>
+                  </div>
+                  </div>
+
+                  <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email" required>
+                      <mat-error *ngIf="agentForm.get('email')?.hasError('email') && agentForm.get('email')?.touched">
+                        Please enter a valid email address
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                         <mat-label>Gender</mat-label>
+                         <mat-select formControlName="gender" required>
+                           <mat-option [value]="'Male'">
+                             Male
+                           </mat-option>
+                           <mat-option [value]="'Female'">
+                             Female
+                           </mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                     </div>
+
+                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                       <mat-form-field class="example-full-width mb-3" appearance="outline">
+                         <mat-label>Marital Status</mat-label>
+                         <mat-select formControlName="maritalStatus" required>
+                           <mat-option [value]="'Unmarried'">
+                             Unmarried
+                           </mat-option>
+                           <mat-option [value]="'Married'">
+                             Married
+                           </mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                     </div>
+                   </div>
+
+                   <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Date Of Birth</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="agentForm.get('dob')?.hasError('required')">
+                          Please select date
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Educational Qualification</mat-label>
+                        <mat-select formControlName="education" required>
+                          <mat-option [value]="'1'">
+                            M.Tech
+                          </mat-option>
+                          <mat-option [value]="'2'">
+                            Ph.d
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="agentForm.get('education')?.hasError('required')">
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label> Address</mat-label>
+                          <textarea matInput formControlName="address"></textarea>
+                        </mat-form-field>
+                      </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>State</mat-label>
+                            <mat-select formControlName="state" required>
+                              <mat-option [value]="'1'">
+                              </mat-option>
+                              <mat-option [value]="'2'">
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="agentForm.get('state')?.hasError('required')">
+                              State is required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>City</mat-label>
+                            <mat-select formControlName="city" required>
+                              <mat-option [value]="'1'">
+                              </mat-option>
+                              <mat-option [value]="'2'">
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Pin Code</mat-label>
+                              <input matInput formControlName="pincode" required>
+                              <mat-error *ngIf="agentForm.get('pincode')?.hasError('required')">
+                                pincode is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Aadhar Number</mat-label>
+                                <input matInput formControlName="aadhar" required>
+                                <mat-error *ngIf="agentForm.get('aadhar')?.hasError('required')">
+                                  Aadhar is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                <label>Upload Photo</label>
+                                <app-file-upload formControlName="uploadFile"></app-file-upload>
+                            </div>
+                            
+                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                <label>Upload ID</label>
+                                <app-file-upload formControlName="uploadid"></app-file-upload>
+                              </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-label>Account Number</mat-label>
+                                    <input matInput formControlName="account" required>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Bank Name</mat-label>
+                                      <input matInput formControlName="bankname" required>
+                                    </mat-form-field>
+                                  </div>
+
+                                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Bank IFSC Code</mat-label>
+                                      <input matInput formControlName="ifsc" required>
+                                    </mat-form-field>
+                                  </div>
+                                  </div>
+
+                                  <div class="row">
+                                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Bank  Branch Name</mat-label>
+                                      <input matInput formControlName="branchname" required>
+                                    </mat-form-field>
+                                  </div>
+                                  </div>
+  
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [disabled]="!agentForm.valid " mat-raised-button
+                      color="primary">Submit</button>
+                    <button type="button" mat-raised-button color="warn">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
