@@ -13,6 +13,7 @@ export class BranchService extends UnsubscribeOnDestroyAdapter {
     []
   );
   public branches$: BehaviorSubject<Branch[]> = new BehaviorSubject<Branch[]>([]);
+  public passwordValidate$=0;
   // Temporarily stores data from dialogs
   dialogData!: Branch;
   constructor(private httpClient: HttpClient) {

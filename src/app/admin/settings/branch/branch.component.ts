@@ -34,6 +34,13 @@ export class  BranchComponent
     'select',
     'name',
     'address',
+    'mobile',
+    'email',
+    'state_name',
+    'district_name',
+    'city_name',
+    'pincode',
+    'username',
     'status',
     'actions',
   ];
@@ -88,6 +95,15 @@ export class  BranchComponent
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside DataService
+        if(this.branchService.passwordValidate$ === 1){
+          this.showNotification(
+            'snackbar-danger',
+            'Pass word mismatch...!!!',
+            'top',
+            'center'
+          );
+        }
+        else{
         this.exampleDatabase?.dataChange.value.push(
           {...this.branchService.getDialogData(), status: 1}
         );
@@ -101,6 +117,7 @@ export class  BranchComponent
           'top',
           'center'
         );
+        }
       }
     });
   }

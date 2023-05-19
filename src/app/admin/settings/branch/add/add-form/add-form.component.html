@@ -19,7 +19,6 @@
             <mat-form-field class="example-full-width mb-3" appearance="outline">
               <mat-label>Branch Name</mat-label>
               <input matInput formControlName="name" required>
-              <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
               <mat-error *ngIf="branchForm.get('name')?.hasError('required')">
                 Branch Name required
               </mat-error>
@@ -30,13 +29,130 @@
             <mat-form-field class="example-full-width mb-3" appearance="outline">
               <mat-label>Branch Address</mat-label>
               <input matInput formControlName="address" required>
-              <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
               <mat-error *ngIf="branchForm.get('address')?.hasError('required')">
                 Branch Address required
               </mat-error>
             </mat-form-field>
           </div>
 
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Mobile</mat-label>
+              <input matInput formControlName="phone" type="text" (input)="onInput($event)"
+              maxlength="10" required>
+              <mat-error *ngIf="branchForm.get('phone')?.hasError('required')">
+                Mobile No is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" required>
+              <mat-error *ngIf="branchForm.get('email')?.hasError('email') && branchForm.get('email')?.touched">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="country" (selectionChange)="onCountryChange($event)" required>
+                <mat-option *ngFor="let option of countries$ | async" [value]="option.id">{{ option.name }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('country')?.hasError('required')">
+                Select Any Country
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>State</mat-label>
+              <mat-select formControlName="state" (selectionChange)="onCountryStateChangeDistrict($event)" required>
+                <mat-option *ngFor="let option of states$ | async" [value]="option.id">{{ option.name }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('state')?.hasError('required')">
+                Select Any State
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>District</mat-label>
+              <mat-select formControlName="district" (selectionChange)="onCountryStateDistrictChangeCity($event)" required>
+                <mat-option *ngFor="let option of districts$ | async" [value]="option.id">{{ option.name }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('district')?.hasError('required')">
+                Select Any District
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>City</mat-label>
+              <mat-select formControlName="city" required>
+                <mat-option *ngFor="let option of cities$ | async" [value]="option.id">{{ option.name }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="branchForm.get('city')?.hasError('required')">
+                Select Any City
+              </mat-error>
+             </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Pin Code</mat-label>
+              <input matInput formControlName="pincode" type="text" (input)="onInput($event)"
+              maxlength="6" required>
+              <mat-error *ngIf="branchForm.get('pincode')?.hasError('required')">
+                Pin Code is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input matInput formControlName="username" required>
+              <mat-error *ngIf="branchForm.get('username')?.hasError('required')">
+                User Name is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" type="password" required>
+              <mat-error *ngIf="branchForm.get('password')?.hasError('required')">
+                password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Re-Enter Password</mat-label>
+              <input matInput formControlName="conformPassword" type="password" required>
+              <mat-error *ngIf="branchForm.get('conformPassword')?.hasError('required')">
+                Re-Enter password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
 
 
