@@ -63,7 +63,9 @@ export class AddBranchFormComponent {
     } else {
       this.dialogTitle = 'Add Branch';
       const blankObject = {} as Branch;
+      const blankObject1 = {} as User;
       this.branch = new Branch(blankObject);
+      this.branch.user = new User(blankObject1);
     }
     this.branchForm = this.createContactForm();
   }
@@ -81,19 +83,19 @@ export class AddBranchFormComponent {
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
       name: [this.branch.name, [Validators.required]],
-      address: [this.branch.address, [Validators.required]],
-      phone: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
+      address: [this.branch.address, [Validators.required]],      
+      phone: [this.branch.user.phone, [Validators.required,Validators.pattern('^[0-9]*$')]],
       email: [
-        '',
+        this.branch.user.email,
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
       country : [''],
       state : [''],
       district : [''],
       city : [''],
-      pincode : [''],
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      pincode : [this.branch.user.pincode],
+      username: [this.branch.user.username, [Validators.required]],
+      password: [this.branch.user.password, [Validators.required]],
       conformPassword: ['', [Validators.required]],
     });
   }
@@ -106,8 +108,20 @@ export class AddBranchFormComponent {
 
   ngOnInit() {
     this.branchService.passwordValidate$=0;
-    this.countryService.getCountries();
-    this.countries$ = this.countryService.countries$;
+    if(this.action === 'edit'){
+     // this.stateService.findState(this.branch.user.state);
+     // this.states$ = this.stateService.states$;
+      // console.log(this.branch.user.state_name);
+      // this.branchForm.patchValue(
+      //   {
+      //     state:this.branch.user.state_name
+      //   }
+      // );
+    }
+    else{
+      this.countryService.getCountries();
+      this.countries$ = this.countryService.countries$;
+    }
   }
 
   public onCountryChange(e:any){

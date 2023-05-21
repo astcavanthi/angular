@@ -33,6 +33,9 @@ export class Branch{
     state:number;
     district: number;
     city:number;
+    state_name:string;
+    district_name:string;
+    city_name:string;
     pincode:string;
     is_branch:number;
     constructor(user: User) {
@@ -51,6 +54,9 @@ export class Branch{
         this.pincode = user.pincode || '';
         this.is_branch = user.is_branch;
         this.username = user.username || '';
+        this.state_name = user.state_name || '';
+        this.district_name = user.district_name || '';
+        this.city_name = user.city_name || '';
       }
     }
   }

@@ -52,6 +52,19 @@ export class StateService extends UnsubscribeOnDestroyAdapter {
            });
    }
 
+   findState(id:number) : any {
+    this.httpClient.get<StateResponse>(environment.apiUrl+"/masters/state/"+id)
+     .subscribe({
+               next : (data1) => {
+                 this.states$.next(data1.data);
+               },
+               error: (error: HttpErrorResponse) => {
+                 console.log(error.name + ' ' + error.message);
+               },
+           });
+   }
+
+
   addState(state: State): void {
     this.dialogData = state;
     this.failureCode = 0;
