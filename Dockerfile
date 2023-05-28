@@ -7,10 +7,11 @@ FROM node:latest as build
 WORKDIR /app
 
 # Add the source code to app
-COPY . /app/
+COPY . /app
 
 # Install all the dependencies
 RUN npm install
+
 
 # Generate the build of the application
 RUN npm run build
