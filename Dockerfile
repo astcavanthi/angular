@@ -21,7 +21,7 @@ RUN npm run build
 
 # Use official nginx image as the base image
 FROM nginx:latest
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /app/dist/smart /usr/share/nginx/html
